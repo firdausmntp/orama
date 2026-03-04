@@ -1,0 +1,349 @@
+import type { TranslationKeys } from "./en";
+
+const id: TranslationKeys = {
+  /* ── Navbar ─────────────────────────────────────── */
+  nav: {
+    stegano: "Stegano",
+    agriAi: "Agri AI",
+    docScan: "DocScan",
+    enhance: "Enhance",
+    forensics: "Forensik",
+    histogram: "Histogram",
+    colorSpace: "Warna",
+    edgeDetect: "Tepi",
+    filters: "Filter",
+    morphology: "Morfo",
+    toggleMenu: "Buka/tutup menu navigasi",
+    groupTools: "Alat",
+    groupProcessing: "Pemrosesan",
+    steganoDesc: "Sembunyikan pesan di gambar",
+    agriAiDesc: "Deteksi tanaman & penghitungan",
+    docScanDesc: "Pindai & koreksi dokumen",
+    enhanceDesc: "Peningkatan gambar otomatis",
+    forensicsDesc: "Deteksi manipulasi gambar",
+    histogramDesc: "Analisis distribusi warna",
+    colorSpaceDesc: "Konversi mode warna",
+    edgeDetectDesc: "Sobel, Prewitt & lainnya",
+    filtersDesc: "Blur, sharpen, emboss",
+    morphologyDesc: "Erosi, dilasi & lainnya",
+  },
+
+  /* ── Landing / Home ─────────────────────────────── */
+  home: {
+    badge: "Pengolahan Citra Digital — 2026",
+    heroDesc:
+      "Hub pemrosesan citra modular menggunakan <accent>AI sisi-klien</accent> — tanpa server. Sepuluh alat canggih dalam satu antarmuka brutalis.",
+    tagBrowser: "▸ 100% Diproses di Browser",
+    tagOpenCV: "▸ OpenCV.js + ONNX Runtime",
+    tagZero: "▸ Tanpa Biaya Backend",
+    marquee:
+      "STEGANOGRAFI ◆ PERTANIAN AI ◆ PEMINDAI DOKUMEN ◆ PENINGKATAN ◆ FORENSIK ◆ HISTOGRAM ◆ RUANG WARNA ◆ DETEKSI TEPI ◆ FILTER ◆ MORFOLOGI ◆ ",
+    modulesHeading: "Modul",
+
+    /* tech stack */
+    techNextjs: "Next.js",
+    techNextjsDesc: "App Router",
+    techTailwind: "Tailwind CSS",
+    techTailwindDesc: "Neobrutalism",
+    techOpencv: "OpenCV.js",
+    techOpencvDesc: "WASM Vision",
+    techOnnx: "ONNX Runtime",
+    techOnnxDesc: "AI Browser",
+  },
+
+  /* ── Module cards ───────────────────────────────── */
+  modules: {
+    steganoTitle: "Steganografi + Deteksi",
+    steganoDesc:
+      "Sembunyikan pesan rahasia di dalam gambar menggunakan encoding LSB. Dekode data tersembunyi dan deteksi manipulasi steganografi dengan analisis chi-square.",
+    agriTitle: "Pertanian Cerdas AI",
+    agriDesc:
+      "AI hemat sumber daya untuk deteksi tanaman/daun, pengukuran koin, dan penghitungan objek otomatis menggunakan inferensi ONNX berbasis browser.",
+    docScanTitle: "Pemindai Dokumen Pintar",
+    docScanDesc:
+      "Deteksi otomatis tepi dokumen, koreksi perspektif, dan hasilkan output pindaian bersih. Penyesuaian sudut manual didukung.",
+    enhanceTitle: "Penasihat Peningkatan",
+    enhanceDesc:
+      "Analisis gambar cerdas yang mengevaluasi kecerahan, kontras, dan saturasi — lalu menyarankan dan menerapkan peningkatan optimal.",
+    forensicsTitle: "Forensik Gambar",
+    forensicsDesc:
+      "Toolkit forensik mini: Error Level Analysis (ELA), deteksi blur via Variance of Laplacian, analisis pola noise, dan ekstraksi EXIF.",
+    histogramTitle: "Histogram & Ekualisasi",
+    histogramDesc:
+      "Visualisasikan histogram RGB dan luminansi dari gambar. Terapkan ekualisasi histogram untuk meningkatkan kontras dan distribusi tonal.",
+    colorSpaceTitle: "Konverter Ruang Warna",
+    colorSpaceDesc:
+      "Konversi gambar antar representasi warna — grayscale, sepia, biner, inversi, kanal individual, dan peta komponen HSL.",
+    edgeDetectTitle: "Deteksi Tepi",
+    edgeDetectDesc:
+      "Deteksi tepi menggunakan operator klasik: Sobel, Prewitt, Laplacian, dan Roberts Cross. Bandingkan metode dan aktifkan inversi.",
+    filtersTitle: "Filter Konvolusi",
+    filtersDesc:
+      "Terapkan kernel konvolusi — blur, sharpen, emboss, edge enhance — atau definisikan kernel kustom 3×3 dengan pratinjau langsung.",
+    morphologyTitle: "Operasi Morfologi",
+    morphologyDesc:
+      "Operasi morfologi biner: erosi, dilasi, opening, closing, gradient, top-hat, dan black-hat dengan elemen struktural yang dapat disesuaikan.",
+    launchModule: "Buka Modul →",
+  },
+
+  /* ── Footer ─────────────────────────────────────── */
+  footer: {
+    credit: "ORAMA vision oleh FIRDAUS SATRIO UTOMO",
+    copyright: "Pengolahan Citra Digital © 2026",
+  },
+
+  /* ── Shared Components ──────────────────────────── */
+  fileUpload: {
+    dropLabel: "Letakkan gambar di sini",
+    dropSublabel: "atau klik untuk menelusuri file",
+    browseFiles: "Telusuri File",
+    urlLabel: "Atau muat dari URL",
+    urlPlaceholder: "https://example.com/gambar.jpg",
+    urlLoad: "Muat",
+    urlError: "Gagal memuat gambar. Periksa URL atau coba yang lain.",
+    sampleLabel: "Atau coba gambar sampel",
+  },
+  resultDisplay: {
+    waiting: "MENUNGGU",
+    processing: "MEMPROSES",
+    complete: "SELESAI",
+    error: "KESALAHAN",
+    save: "⬇ Simpan",
+  },
+
+  /* ── Steganography ──────────────────────────────── */
+  steg: {
+    pageTitle: "Steganografi",
+    pageSubtitle: "Sembunyikan & deteksi pesan rahasia di gambar menggunakan encoding LSB",
+    tabEncode: "Enkode",
+    tabDecode: "Dekode",
+    tabDetect: "Deteksi",
+    /* Encode panel */
+    uploadCarrier: "Unggah gambar pembawa",
+    uploadCarrierHint: "PNG disarankan untuk encoding lossless",
+    capacity: "KAPASITAS",
+    characters: "karakter",
+    placeholder: "Masukkan pesan rahasia Anda...",
+    encoding: "Mengenkode...",
+    encodeBtn: "🔐 Enkode",
+    encodedOutput: "Output Terenkode",
+    encodedPlaceholder: "Gambar terenkode akan muncul di sini",
+    /* Decode panel */
+    uploadStego: "Unggah gambar steganografi",
+    uploadStegoHint: "Gambar yang mungkin berisi pesan tersembunyi",
+    decodedMessage: "Pesan Terdekode",
+    extractedMsg: "PESAN DIEKSTRAKSI:",
+    decodedPlaceholder: "Pesan tersembunyi akan muncul di sini",
+    /* Detect panel */
+    uploadAnalyze: "Unggah gambar untuk dianalisis",
+    uploadAnalyzeHint: "Deteksi apakah gambar berisi data steganografi tersembunyi",
+    detectionResult: "Hasil Deteksi",
+    stegoProb: "Probabilitas Stego",
+    analysis: "ANALISIS:",
+    analysisPlaceholder: "Hasil analisis akan muncul di sini",
+  },
+
+  /* ── Agriculture ────────────────────────────────── */
+  agri: {
+    pageTitle: "Pertanian Cerdas AI",
+    pageSubtitle:
+      "Penghitungan objek, deteksi koin & pengukuran — semua di browser",
+    tabCount: "Penghitung Objek",
+    tabCoin: "Deteksi Koin",
+    /* Counting */
+    parameters: "Parameter",
+    threshold: "Ambang Batas",
+    minArea: "Area Minimum",
+    uploadCount: "Unggah gambar untuk menghitung objek",
+    uploadCountHint: "Terbaik dengan gambar kontras tinggi",
+    counting: "Menghitung...",
+    countBtn: "🔢 Hitung Objek",
+    countResult: "Hasil Penghitungan",
+    objectsFound: "Objek Ditemukan",
+    countPlaceholder: "Hasil akan muncul di sini",
+    /* Coin */
+    circleParams: "Parameter Deteksi Lingkaran",
+    minRadius: "Radius Minimum",
+    maxRadius: "Radius Maksimum",
+    uploadCoin: "Unggah gambar koin",
+    uploadCoinHint: "Tampilan atas yang jelas paling baik",
+    detecting: "Mendeteksi...",
+    detectBtn: "🪙 Deteksi Koin",
+    coinDetection: "Deteksi Koin",
+    coinsDetected: "Koin Terdeteksi",
+    coinPlaceholder: "Hasil deteksi koin di sini",
+  },
+
+  /* ── Document Scanner ───────────────────────────── */
+  docScan: {
+    pageTitle: "Pemindai Dokumen",
+    pageSubtitle:
+      "Deteksi tepi otomatis, koreksi perspektif & peningkatan dokumen",
+    uploadDoc: "Unggah foto dokumen",
+    uploadDocHint: "Terbaik dengan tepi dokumen yang jelas terlihat",
+    edgeDetection: "Deteksi Tepi",
+    detectedCorners: "SUDUT TERDETEKSI:",
+    edgePlaceholder: "Output deteksi tepi",
+    scannedDoc: "Dokumen Terpindai",
+    enhanced: "✓ Ditingkatkan",
+    enhanceBtn: "📝 Tingkatkan (H&P)",
+    scanPlaceholder: "Dokumen terkoreksi di sini",
+  },
+
+  /* ── Enhancement Advisor ────────────────────────── */
+  enhance: {
+    pageTitle: "Penasihat Peningkatan",
+    pageSubtitle: "Analisis gambar cerdas dengan saran peningkatan otomatis",
+    uploadAnalysis: "Unggah gambar untuk analisis",
+    uploadAnalysisHint: "Kami akan menganalisis kualitas & menyarankan peningkatan",
+    imageMetrics: "Metrik Gambar",
+    brightness: "Kecerahan",
+    contrast: "Kontras",
+    saturation: "Saturasi",
+    sharpness: "Ketajaman",
+    dominant: "Dominan",
+    luminanceHistogram: "Histogram Luminansi",
+    suggestions: "Saran",
+    applyAll: "Terapkan Semua",
+    applied: "✓ Diterapkan",
+    applyAction: "Terapkan",
+    enhancedPreview: "Pratinjau Ditingkatkan",
+    previewPlaceholder: "Terapkan saran untuk melihat pratinjau",
+  },
+
+  /* ── Forensics ──────────────────────────────────── */
+  forensics: {
+    pageTitle: "Penganalisis Noise & Blur",
+    pageSubtitle: "Forensik Gambar Mini — ELA · Peta Blur · Pola Noise · EXIF",
+    uploadForensic: "Unggah gambar untuk analisis forensik",
+    uploadForensicHint:
+      "JPEG disarankan untuk ELA — PNG / WebP juga didukung",
+    running: "Menjalankan rangkaian forensik …",
+    tryAgain: "Coba Lagi",
+    originalImage: "Gambar Asli",
+    uploadDifferent: "← Unggah gambar lain",
+    /* ELA */
+    elaTitle: "Error Level Analysis (ELA)",
+    elaDesc:
+      "Mengompresi ulang gambar sebagai JPEG dan menyoroti area yang berbeda secara signifikan — area terang mungkin menunjukkan pengeditan atau penyambungan.",
+    elaQuality: "Kualitas",
+    elaAmplification: "Amplifikasi",
+    rerunEla: "Jalankan Ulang ELA",
+    maxDelta: "Max Δ",
+    avgDelta: "Avg Δ",
+    suspicious: "Mencurigakan",
+    elaHigh: "⚠ Residu ELA tinggi terdeteksi — kemungkinan manipulasi",
+    elaMod: "⚡ Residu moderat — periksa area terang",
+    elaLow: "✓ Residu rendah — gambar tampak konsisten",
+    /* Blur */
+    blurTitle: "Peta Blur & Ketajaman",
+    blurDesc:
+      "Menampilkan varians Laplacian per-blok. <red>Merah</red> = blur, <blue>Biru</blue> = tajam. Berguna untuk mendeteksi area yang diblur secara selektif.",
+    blockSize: "Ukuran Blok",
+    rerunBlur: "Jalankan Ulang Peta Blur",
+    variance: "Varians",
+    blurry: "Blur",
+    verdictBlurry: "Gambar blur",
+    verdictSharp: "Gambar tajam",
+    verdict: "Kesimpulan",
+    /* Noise */
+    noiseTitle: "Analisis Pola Noise",
+    noiseDesc:
+      "Mengekstraksi residu frekuensi tinggi dan mengukur seberapa seragam distribusi noise-nya. Area yang disambung sering memiliki profil noise yang berbeda.",
+    noiseLevel: "Level Noise",
+    uniformity: "Keseragaman",
+    /* EXIF */
+    metaTitle: "Metadata File & EXIF",
+    field: "Bidang",
+    value: "Nilai",
+  },
+
+  /* ── Language switcher ──────────────────────────── */
+
+  /* ── Histogram ──────────────────────────────────── */
+  histogram: {
+    pageTitle: "Histogram & Ekualisasi",
+    pageSubtitle: "Visualisasikan distribusi warna dan ekualisasi kontras gambar",
+    uploadLabel: "Unggah gambar untuk analisis histogram",
+    uploadHint: "Mendukung PNG, JPEG, WebP",
+    resultTitle: "Analisis Histogram",
+    computing: "Menghitung histogram…",
+    channelLabel: "Kanal",
+    channelAll: "Semua",
+    channelRed: "Merah",
+    channelGreen: "Hijau",
+    channelBlue: "Biru",
+    channelLum: "Luminansi",
+    originalHist: "Histogram Asli",
+    equalizedHist: "Histogram Terekualisasi",
+    originalImage: "Gambar asli",
+    equalizedImage: "Gambar terekualisasi",
+  },
+
+  /* ── Color Space ────────────────────────────────── */
+  colorSpace: {
+    pageTitle: "Konverter Ruang Warna",
+    pageSubtitle: "Konversi gambar antar representasi warna yang berbeda",
+    uploadLabel: "Unggah gambar untuk dikonversi",
+    uploadHint: "PNG, JPEG, atau WebP",
+    resultTitle: "Konversi Warna",
+    converting: "Mengonversi ruang warna…",
+    modeLabel: "Mode Warna",
+    threshold: "Ambang Batas",
+    originalTitle: "Asli",
+    outputTitle: "Terkonversi",
+  },
+
+  /* ── Edge Detection ─────────────────────────────── */
+  edgeDetect: {
+    pageTitle: "Deteksi Tepi",
+    pageSubtitle: "Deteksi tepi menggunakan operator Sobel, Prewitt, Laplacian & Roberts",
+    uploadLabel: "Unggah gambar untuk deteksi tepi",
+    uploadHint: "Terbaik dengan bentuk dan kontur yang jelas",
+    resultTitle: "Deteksi Tepi",
+    detecting: "Mendeteksi tepi…",
+    methodLabel: "Metode Deteksi",
+    invertLabel: "Inversi",
+    originalTitle: "Asli",
+    outputTitle: "Tepi",
+  },
+
+  /* ── Convolution Filters ────────────────────────── */
+  filters: {
+    pageTitle: "Filter Konvolusi",
+    pageSubtitle: "Terapkan blur, sharpen, emboss dan kernel konvolusi kustom 3×3",
+    uploadLabel: "Unggah gambar untuk difilter",
+    uploadHint: "PNG atau JPEG — gambar besar mungkin lebih lambat",
+    resultTitle: "Hasil Filter",
+    applying: "Menerapkan filter…",
+    presetLabel: "Preset Filter",
+    iterations: "Iterasi",
+    kernelPreview: "Matriks Kernel",
+    originalTitle: "Asli",
+    outputTitle: "Terfilter",
+  },
+
+  /* ── Morphological Operations ───────────────────── */
+  morphology: {
+    pageTitle: "Operasi Morfologi",
+    pageSubtitle: "Erosi, dilasi, opening, closing & lainnya pada gambar biner",
+    uploadLabel: "Unggah gambar untuk morfologi",
+    uploadHint: "Gambar akan dibinerisasi sebelum diproses",
+    resultTitle: "Hasil Morfologi",
+    processing: "Memproses morfologi…",
+    opLabel: "Operasi",
+    shapeLabel: "Elemen Struktural",
+    kernelSize: "Ukuran Kernel",
+    threshold: "Ambang Binarisasi",
+    originalTitle: "Asli",
+    binaryTitle: "Input Biner",
+    outputTitle: "Hasil",
+  },
+
+  lang: {
+    label: "ID",
+    switchTo: "Ganti ke Bahasa Inggris",
+  },
+} as const;
+
+export default id;
