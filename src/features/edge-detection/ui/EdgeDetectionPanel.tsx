@@ -1,11 +1,16 @@
 "use client";
 
-import { FileUpload } from "@/shared/components/FileUpload";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useEdgeDetection } from "../hooks/useEdgeDetection";
 import { EDGE_METHODS } from "../lib/edgeDetect";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
 import type { EdgeMethod } from "../lib/edgeDetect";
+
+const EDGE_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/edge-bridge.jpg", label: "Bridge" },
+  { src: "/examples/edge-church.jpg", label: "Church" },
+];
 
 export default function EdgeDetectionPanel() {
   const ed = useEdgeDetection();
@@ -18,6 +23,7 @@ export default function EdgeDetectionPanel() {
         onFileSelect={(f) => ed.analyze(f)}
         label={t.edgeDetect.uploadLabel}
         sublabel={t.edgeDetect.uploadHint}
+        examples={EDGE_EXAMPLES}
       />
 
       {ed.status === "processing" && (

@@ -1,10 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { FileUpload } from "@/shared/components/FileUpload";
+import { Ruler, FileText } from "lucide-react";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useScanner } from "../hooks/useScanner";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+
+const DOC_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/doc-notebook.jpg", label: "Notebook" },
+  { src: "/examples/doc-desk.jpg", label: "Desk" },
+];
 
 export function ScannerPanel() {
   const [file, setFile] = useState<File | null>(null);
@@ -32,6 +38,7 @@ export function ScannerPanel() {
         onFileSelect={handleFile}
         label={t.docScan.uploadDoc}
         sublabel={t.docScan.uploadDocHint}
+        examples={DOC_EXAMPLES}
       />
 
       {/* Results */}
@@ -64,7 +71,7 @@ export function ScannerPanel() {
               </div>
             ) : (
               <div className="text-center py-12 text-charcoal-light">
-                <p className="text-4xl mb-2">📐</p>
+                <Ruler className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
                 <p className="font-mono text-sm">{t.docScan.edgePlaceholder}</p>
               </div>
             )}
@@ -98,7 +105,7 @@ export function ScannerPanel() {
               </div>
             ) : (
               <div className="text-center py-12 text-charcoal-light">
-                <p className="text-4xl mb-2">📄</p>
+                <FileText className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
                 <p className="font-mono text-sm">{t.docScan.scanPlaceholder}</p>
               </div>
             )}

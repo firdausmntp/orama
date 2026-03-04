@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import MorphologyPanel from "@/features/morphology/ui/MorphologyPanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { Shapes } from "lucide-react";
 
 export default function MorphologyPage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function MorphologyPage() {
   return (
     <div>
       <PageHeader
-        icon="⚙️"
+        icon={<Shapes className="w-8 h-8" />}
         title={t.morphology.pageTitle}
         subtitle={t.morphology.pageSubtitle}
         accentColor="bg-crimson"

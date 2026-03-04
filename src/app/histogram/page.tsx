@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import HistogramPanel from "@/features/histogram/ui/HistogramPanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { BarChart2 } from "lucide-react";
 
 export default function HistogramPage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function HistogramPage() {
   return (
     <div>
       <PageHeader
-        icon="📊"
+        icon={<BarChart2 className="w-8 h-8" />}
         title={t.histogram.pageTitle}
         subtitle={t.histogram.pageSubtitle}
         accentColor="bg-orange-neon"

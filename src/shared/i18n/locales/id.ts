@@ -34,7 +34,7 @@ const id: TranslationKeys = {
     heroDesc:
       "Hub pemrosesan citra modular menggunakan <accent>AI sisi-klien</accent> — tanpa server. Sepuluh alat canggih dalam satu antarmuka brutalis.",
     tagBrowser: "▸ 100% Diproses di Browser",
-    tagOpenCV: "▸ OpenCV.js + ONNX Runtime",
+    tagTFjs: "▸ TensorFlow.js AI",
     tagZero: "▸ Tanpa Biaya Backend",
     marquee:
       "STEGANOGRAFI ◆ PERTANIAN AI ◆ PEMINDAI DOKUMEN ◆ PENINGKATAN ◆ FORENSIK ◆ HISTOGRAM ◆ RUANG WARNA ◆ DETEKSI TEPI ◆ FILTER ◆ MORFOLOGI ◆ ",
@@ -45,10 +45,10 @@ const id: TranslationKeys = {
     techNextjsDesc: "App Router",
     techTailwind: "Tailwind CSS",
     techTailwindDesc: "Neobrutalism",
-    techOpencv: "OpenCV.js",
-    techOpencvDesc: "WASM Vision",
-    techOnnx: "ONNX Runtime",
-    techOnnxDesc: "AI Browser",
+    techTFjs: "TensorFlow.js",
+    techTFjsDesc: "AI di Browser",
+    techCanvas: "Canvas API",
+    techCanvasDesc: "Pemrosesan Piksel",
   },
 
   /* ── Module cards ───────────────────────────────── */
@@ -58,10 +58,10 @@ const id: TranslationKeys = {
       "Sembunyikan pesan rahasia di dalam gambar menggunakan encoding LSB. Dekode data tersembunyi dan deteksi manipulasi steganografi dengan analisis chi-square.",
     agriTitle: "Pertanian Cerdas AI",
     agriDesc:
-      "AI hemat sumber daya untuk deteksi tanaman/daun, pengukuran koin, dan penghitungan objek otomatis menggunakan inferensi ONNX berbasis browser.",
+      "Deteksi objek berbasis AI dengan TensorFlow.js COCO-SSD, pelabelan komponen terhubung, dan deteksi lingkaran Hough — semua di browser.",
     docScanTitle: "Pemindai Dokumen Pintar",
     docScanDesc:
-      "Deteksi otomatis tepi dokumen, koreksi perspektif, dan hasilkan output pindaian bersih. Penyesuaian sudut manual didukung.",
+      "Deteksi tepi dokumen otomatis dengan Canny edge detection, koreksi perspektif via homografi DLT, dan hasilkan output pindaian bersih.",
     enhanceTitle: "Penasihat Peningkatan",
     enhanceDesc:
       "Analisis gambar cerdas yang mengevaluasi kecerahan, kontras, dan saturasi — lalu menyarankan dan menerapkan peningkatan optimal.",
@@ -102,13 +102,14 @@ const id: TranslationKeys = {
     urlLoad: "Muat",
     urlError: "Gagal memuat gambar. Periksa URL atau coba yang lain.",
     sampleLabel: "Atau coba gambar sampel",
+    exampleLabel: "Gunakan gambar contoh",
   },
   resultDisplay: {
     waiting: "MENUNGGU",
     processing: "MEMPROSES",
     complete: "SELESAI",
     error: "KESALAHAN",
-    save: "⬇ Simpan",
+    save: "Simpan",
   },
 
   /* ── Steganography ──────────────────────────────── */
@@ -125,7 +126,7 @@ const id: TranslationKeys = {
     characters: "karakter",
     placeholder: "Masukkan pesan rahasia Anda...",
     encoding: "Mengenkode...",
-    encodeBtn: "🔐 Enkode",
+    encodeBtn: "Enkode",
     encodedOutput: "Output Terenkode",
     encodedPlaceholder: "Gambar terenkode akan muncul di sini",
     /* Decode panel */
@@ -150,6 +151,23 @@ const id: TranslationKeys = {
       "Penghitungan objek, deteksi koin & pengukuran — semua di browser",
     tabCount: "Penghitung Objek",
     tabCoin: "Deteksi Koin",
+    tabAI: "Deteksi AI",
+    aiModelConfig: "Konfigurasi Model AI",
+    modelLoaded: "SIAP",
+    modelNotLoaded: "BELUM DIMUAT",
+    preloadModel: "Muat Model",
+    confidenceThreshold: "Kepercayaan",
+    aiModelDesc: "Model COCO-SSD mendeteksi 80 kelas objek (orang, mobil, anjing, kucing, dll.) menggunakan backbone MobileNet v2. Model mengunduh ~5MB pada penggunaan pertama.",
+    uploadAI: "Unggah gambar untuk deteksi AI",
+    uploadAIHint: "Mendeteksi orang, hewan, kendaraan, furnitur & lainnya",
+    detectAIBtn: "Deteksi Objek",
+    loadingModel: "Memuat model...",
+    aiDetectionResult: "Hasil Deteksi AI",
+    classesFound: "Kelas",
+    inferenceTime: "Inferensi",
+    detectedClasses: "Kelas Terdeteksi",
+    allDetections: "Semua Deteksi",
+    aiPlaceholder: "Hasil deteksi AI akan muncul di sini",
     /* Counting */
     parameters: "Parameter",
     threshold: "Ambang Batas",
@@ -157,7 +175,7 @@ const id: TranslationKeys = {
     uploadCount: "Unggah gambar untuk menghitung objek",
     uploadCountHint: "Terbaik dengan gambar kontras tinggi",
     counting: "Menghitung...",
-    countBtn: "🔢 Hitung Objek",
+    countBtn: "Hitung Objek",
     countResult: "Hasil Penghitungan",
     objectsFound: "Objek Ditemukan",
     countPlaceholder: "Hasil akan muncul di sini",
@@ -168,7 +186,7 @@ const id: TranslationKeys = {
     uploadCoin: "Unggah gambar koin",
     uploadCoinHint: "Tampilan atas yang jelas paling baik",
     detecting: "Mendeteksi...",
-    detectBtn: "🪙 Deteksi Koin",
+    detectBtn: "Deteksi Koin",
     coinDetection: "Deteksi Koin",
     coinsDetected: "Koin Terdeteksi",
     coinPlaceholder: "Hasil deteksi koin di sini",
@@ -186,7 +204,7 @@ const id: TranslationKeys = {
     edgePlaceholder: "Output deteksi tepi",
     scannedDoc: "Dokumen Terpindai",
     enhanced: "✓ Ditingkatkan",
-    enhanceBtn: "📝 Tingkatkan (H&P)",
+    enhanceBtn: "Tingkatkan (H&P)",
     scanPlaceholder: "Dokumen terkoreksi di sini",
   },
 
@@ -233,7 +251,7 @@ const id: TranslationKeys = {
     avgDelta: "Avg Δ",
     suspicious: "Mencurigakan",
     elaHigh: "⚠ Residu ELA tinggi terdeteksi — kemungkinan manipulasi",
-    elaMod: "⚡ Residu moderat — periksa area terang",
+    elaMod: "Residu moderat — periksa area terang",
     elaLow: "✓ Residu rendah — gambar tampak konsisten",
     /* Blur */
     blurTitle: "Peta Blur & Ketajaman",

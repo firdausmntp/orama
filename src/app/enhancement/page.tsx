@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import { EnhancementPanel } from "@/features/enhancement/ui/EnhancementPanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { Sparkles } from "lucide-react";
 
 export default function EnhancementPage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function EnhancementPage() {
   return (
     <div>
       <PageHeader
-        icon="✨"
+        icon={<Sparkles className="w-8 h-8" />}
         title={t.enhance.pageTitle}
         subtitle={t.enhance.pageSubtitle}
         accentColor="bg-lavender"

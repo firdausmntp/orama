@@ -2,6 +2,18 @@
 
 import { ModuleCard } from "@/shared/components/ModuleCard";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import {
+  Lock,
+  Sprout,
+  Scan,
+  Sparkles,
+  SearchCode,
+  BarChart2,
+  Palette,
+  SquareDashed,
+  SlidersHorizontal,
+  Shapes,
+} from "lucide-react";
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -9,47 +21,47 @@ export default function HomePage() {
   const MODULES = [
     {
       href: "/steganography",
-      icon: "🔐",
+      icon: <Lock className="w-7 h-7" />,
       title: t.modules.steganoTitle,
       description: t.modules.steganoDesc,
-      tags: ["LSB", "Encode", "Decode", "Detect"],
+      tags: ["LSB", "Encode", "Decode", "Chi-Square"],
       accentColor: "orange" as const,
     },
     {
       href: "/agriculture",
-      icon: "🌿",
+      icon: <Sprout className="w-7 h-7" />,
       title: t.modules.agriTitle,
       description: t.modules.agriDesc,
-      tags: ["ONNX", "YOLO", "Counting", "Detection"],
+      tags: ["TF.js", "COCO-SSD", "CCL", "Hough"],
       accentColor: "mint" as const,
     },
     {
       href: "/document-scanner",
-      icon: "📄",
+      icon: <Scan className="w-7 h-7" />,
       title: t.modules.docScanTitle,
       description: t.modules.docScanDesc,
-      tags: ["OpenCV.js", "Perspective", "Edge Detect"],
+      tags: ["Canny", "Homography", "Otsu"],
       accentColor: "teal" as const,
     },
     {
       href: "/enhancement",
-      icon: "✨",
+      icon: <Sparkles className="w-7 h-7" />,
       title: t.modules.enhanceTitle,
       description: t.modules.enhanceDesc,
-      tags: ["Histogram", "Advisor", "Auto-Enhance"],
+      tags: ["Metrics", "Advisor", "Auto-Enhance"],
       accentColor: "lavender" as const,
     },
     {
       href: "/forensics",
-      icon: "🔍",
+      icon: <SearchCode className="w-7 h-7" />,
       title: t.modules.forensicsTitle,
       description: t.modules.forensicsDesc,
-      tags: ["ELA", "Blur", "Noise", "EXIF"],
+      tags: ["ELA", "Blur Map", "Noise", "EXIF"],
       accentColor: "crimson" as const,
     },
     {
       href: "/histogram",
-      icon: "📊",
+      icon: <BarChart2 className="w-7 h-7" />,
       title: t.modules.histogramTitle,
       description: t.modules.histogramDesc,
       tags: ["Histogram", "Equalization", "RGB", "Luminance"],
@@ -57,7 +69,7 @@ export default function HomePage() {
     },
     {
       href: "/color-space",
-      icon: "🎨",
+      icon: <Palette className="w-7 h-7" />,
       title: t.modules.colorSpaceTitle,
       description: t.modules.colorSpaceDesc,
       tags: ["Grayscale", "Sepia", "HSL", "Binary"],
@@ -65,7 +77,7 @@ export default function HomePage() {
     },
     {
       href: "/edge-detection",
-      icon: "🔲",
+      icon: <SquareDashed className="w-7 h-7" />,
       title: t.modules.edgeDetectTitle,
       description: t.modules.edgeDetectDesc,
       tags: ["Sobel", "Prewitt", "Laplacian", "Roberts"],
@@ -73,7 +85,7 @@ export default function HomePage() {
     },
     {
       href: "/filters",
-      icon: "🔧",
+      icon: <SlidersHorizontal className="w-7 h-7" />,
       title: t.modules.filtersTitle,
       description: t.modules.filtersDesc,
       tags: ["Blur", "Sharpen", "Emboss", "Custom"],
@@ -81,7 +93,7 @@ export default function HomePage() {
     },
     {
       href: "/morphology",
-      icon: "⚙️",
+      icon: <Shapes className="w-7 h-7" />,
       title: t.modules.morphologyTitle,
       description: t.modules.morphologyDesc,
       tags: ["Erode", "Dilate", "Open", "Close"],
@@ -121,7 +133,7 @@ export default function HomePage() {
                 {t.home.tagBrowser}
               </span>
               <span className="px-3 py-1 neo-border bg-teal-deep text-orange-light text-xs font-mono font-bold">
-                {t.home.tagOpenCV}
+                {t.home.tagTFjs}
               </span>
               <span className="px-3 py-1 neo-border bg-teal-deep text-lavender text-xs font-mono font-bold">
                 {t.home.tagZero}
@@ -170,8 +182,8 @@ export default function HomePage() {
             {[
               { label: t.home.techNextjs, desc: t.home.techNextjsDesc, color: "text-bone" },
               { label: t.home.techTailwind, desc: t.home.techTailwindDesc, color: "text-orange-neon" },
-              { label: t.home.techOpencv, desc: t.home.techOpencvDesc, color: "text-mint" },
-              { label: t.home.techOnnx, desc: t.home.techOnnxDesc, color: "text-lavender" },
+              { label: t.home.techTFjs, desc: t.home.techTFjsDesc, color: "text-mint" },
+              { label: t.home.techCanvas, desc: t.home.techCanvasDesc, color: "text-lavender" },
             ].map((tech) => (
               <div key={tech.label} className="text-center">
                 <p className={`font-black text-lg ${tech.color}`}>

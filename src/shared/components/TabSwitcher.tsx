@@ -5,7 +5,7 @@ import { useState } from "react";
 interface Tab {
   id: string;
   label: string;
-  icon?: string;
+  icon?: React.ReactNode;
 }
 
 interface TabSwitcherProps {
@@ -28,6 +28,7 @@ export function TabSwitcher({ tabs, defaultTab, children }: TabSwitcherProps) {
             className={`
               px-4 py-3 font-bold uppercase text-sm tracking-wider
               border-3 border-b-0 border-charcoal transition-all
+              flex items-center gap-1.5
               ${
                 activeTab === tab.id
                   ? "bg-orange-neon text-bone -mb-[3px] border-b-3 border-b-orange-neon z-10"
@@ -35,7 +36,7 @@ export function TabSwitcher({ tabs, defaultTab, children }: TabSwitcherProps) {
               }
             `}
           >
-            {tab.icon && <span className="mr-1">{tab.icon}</span>}
+            {tab.icon && <span className="flex items-center justify-center w-4 h-4">{tab.icon}</span>}
             {tab.label}
           </button>
         ))}

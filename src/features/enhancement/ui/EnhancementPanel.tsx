@@ -1,10 +1,16 @@
 "use client";
 
-import { FileUpload } from "@/shared/components/FileUpload";
+import { Sparkles } from "lucide-react";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useEnhancement } from "../hooks/useEnhancement";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
 import type { ImageMetrics, Enhancement } from "../lib/advisor";
+
+const ENHANCE_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/enhance-dark.jpg", label: "Dark Scene" },
+  { src: "/examples/enhance-sunset.jpg", label: "Sunset" },
+];
 
 function MetricBar({
   label,
@@ -92,6 +98,7 @@ export function EnhancementPanel() {
         onFileSelect={(f) => analyze(f)}
         label={t.enhance.uploadAnalysis}
         sublabel={t.enhance.uploadAnalysisHint}
+        examples={ENHANCE_EXAMPLES}
       />
 
       {metrics && (
@@ -204,7 +211,7 @@ export function EnhancementPanel() {
               />
             ) : (
               <div className="text-center py-16 text-charcoal-light">
-                <p className="text-4xl mb-2">✨</p>
+                <Sparkles className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
                 <p className="font-mono text-sm">
                   {t.enhance.previewPlaceholder}
                 </p>

@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import ForensicsPanel from "@/features/forensics/ui/ForensicsPanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { SearchCode } from "lucide-react";
 
 export default function ForensicsPage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function ForensicsPage() {
   return (
     <main className="min-h-screen bg-bone px-4 py-10 md:px-8">
       <PageHeader
-        icon="🕵️"
+        icon={<SearchCode className="w-8 h-8" />}
         title={t.forensics.pageTitle}
         subtitle={t.forensics.pageSubtitle}
         accentColor="bg-crimson"

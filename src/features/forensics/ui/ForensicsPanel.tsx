@@ -1,10 +1,16 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { FileUpload } from "@/shared/components/FileUpload";
+import { Search } from "lucide-react";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useForensics } from "../hooks/useForensics";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+
+const FORENSICS_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/forensics-city.jpg", label: "City" },
+  { src: "/examples/forensics-nature.jpg", label: "Nature" },
+];
 
 /* ================================================================
    FORENSICS PANEL  —  master component with inline sub-panels
@@ -24,6 +30,7 @@ export default function ForensicsPanel() {
             label={t.forensics.uploadForensic}
             sublabel={t.forensics.uploadForensicHint}
             onFileSelect={handleFile}
+            examples={FORENSICS_EXAMPLES}
           />
         </div>
       )}
@@ -279,7 +286,7 @@ function BlurSection({
   return (
     <section className="neo-card p-5 space-y-4">
       <h3 className="font-bold text-xl flex items-center gap-2">
-        <span className="text-2xl">🔍</span> {t.forensics.blurTitle}
+        <Search className="w-6 h-6" /> {t.forensics.blurTitle}
       </h3>
 
       <p className="text-sm opacity-80">

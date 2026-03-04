@@ -1,11 +1,16 @@
 "use client";
 
-import { FileUpload } from "@/shared/components/FileUpload";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useColorSpace } from "../hooks/useColorSpace";
 import { COLOR_MODES } from "../lib/colorSpace";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
 import type { ColorMode } from "../lib/colorSpace";
+
+const COLOR_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/color-neon.jpg", label: "Neon" },
+  { src: "/examples/color-autumn.jpg", label: "Autumn" },
+];
 
 export default function ColorSpacePanel() {
   const cs = useColorSpace();
@@ -18,6 +23,7 @@ export default function ColorSpacePanel() {
         onFileSelect={(f) => cs.analyze(f)}
         label={t.colorSpace.uploadLabel}
         sublabel={t.colorSpace.uploadHint}
+        examples={COLOR_EXAMPLES}
       />
 
       {cs.status === "processing" && (

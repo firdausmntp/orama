@@ -1,10 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { FileUpload } from "@/shared/components/FileUpload";
+import { Hash, CircleDot } from "lucide-react";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useDetection } from "../hooks/useDetection";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+
+const AGRI_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/agri-fruits.jpg", label: "Nature" },
+  { src: "/examples/agri-objects.jpg", label: "Objects" },
+];
 
 export function CountingPanel() {
   const [file, setFile] = useState<File | null>(null);
@@ -57,6 +63,7 @@ export function CountingPanel() {
             onFileSelect={(f) => setFile(f)}
             label={t.agri.uploadCount}
             sublabel={t.agri.uploadCountHint}
+            examples={AGRI_EXAMPLES}
           />
           {file && (
             <button
@@ -95,7 +102,7 @@ export function CountingPanel() {
             </div>
           ) : (
             <div className="text-center py-12 text-charcoal-light">
-              <p className="text-4xl mb-2">🔢</p>
+              <Hash className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
               <p className="font-mono text-sm">{t.agri.countPlaceholder}</p>
             </div>
           )}
@@ -156,6 +163,7 @@ export function CoinPanel() {
             onFileSelect={(f) => setFile(f)}
             label={t.agri.uploadCoin}
             sublabel={t.agri.uploadCoinHint}
+            examples={AGRI_EXAMPLES}
           />
           {file && (
             <button
@@ -183,7 +191,7 @@ export function CoinPanel() {
             </div>
           ) : (
             <div className="text-center py-12 text-charcoal-light">
-              <p className="text-4xl mb-2">🪙</p>
+              <CircleDot className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
               <p className="font-mono text-sm">{t.agri.coinPlaceholder}</p>
             </div>
           )}

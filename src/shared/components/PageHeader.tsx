@@ -1,5 +1,5 @@
 interface PageHeaderProps {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   subtitle: string;
   accentColor?: string;
@@ -16,7 +16,7 @@ export function PageHeader({
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex items-center gap-4">
           <div
-            className={`w-16 h-16 ${accentColor} neo-border flex items-center justify-center text-3xl`}
+            className={`w-16 h-16 ${accentColor} neo-border flex items-center justify-center text-bone`}
           >
             {icon}
           </div>

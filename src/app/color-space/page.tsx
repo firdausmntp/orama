@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import ColorSpacePanel from "@/features/color-space/ui/ColorSpacePanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { Palette } from "lucide-react";
 
 export default function ColorSpacePage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function ColorSpacePage() {
   return (
     <div>
       <PageHeader
-        icon="🎨"
+        icon={<Palette className="w-8 h-8" />}
         title={t.colorSpace.pageTitle}
         subtitle={t.colorSpace.pageSubtitle}
         accentColor="bg-mint"

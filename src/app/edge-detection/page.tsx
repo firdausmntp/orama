@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import EdgeDetectionPanel from "@/features/edge-detection/ui/EdgeDetectionPanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { SquareDashed } from "lucide-react";
 
 export default function EdgeDetectionPage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function EdgeDetectionPage() {
   return (
     <div>
       <PageHeader
-        icon="🔲"
+        icon={<SquareDashed className="w-8 h-8" />}
         title={t.edgeDetect.pageTitle}
         subtitle={t.edgeDetect.pageSubtitle}
         accentColor="bg-teal-mid"

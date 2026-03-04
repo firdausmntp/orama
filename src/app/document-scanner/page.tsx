@@ -3,6 +3,7 @@
 import { PageHeader } from "@/shared/components/PageHeader";
 import { ScannerPanel } from "@/features/document-scanner/ui/ScannerPanel";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { Scan } from "lucide-react";
 
 export default function DocumentScannerPage() {
   const { t } = useTranslation();
@@ -10,7 +11,7 @@ export default function DocumentScannerPage() {
   return (
     <div>
       <PageHeader
-        icon="📄"
+        icon={<Scan className="w-8 h-8" />}
         title={t.docScan.pageTitle}
         subtitle={t.docScan.pageSubtitle}
         accentColor="bg-teal-mid"

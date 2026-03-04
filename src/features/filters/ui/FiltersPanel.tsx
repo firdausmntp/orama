@@ -1,11 +1,16 @@
 "use client";
 
-import { FileUpload } from "@/shared/components/FileUpload";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useFilters } from "../hooks/useFilters";
 import { FILTER_PRESETS, PRESET_KERNELS } from "../lib/filters";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
 import type { FilterPreset } from "../lib/filters";
+
+const FILTER_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/filter-tiles.jpg", label: "Tiles" },
+  { src: "/examples/filter-moss.jpg", label: "Moss" },
+];
 
 export default function FiltersPanel() {
   const fl = useFilters();
@@ -18,6 +23,7 @@ export default function FiltersPanel() {
         onFileSelect={(f) => fl.analyze(f)}
         label={t.filters.uploadLabel}
         sublabel={t.filters.uploadHint}
+        examples={FILTER_EXAMPLES}
       />
 
       {fl.status === "processing" && (

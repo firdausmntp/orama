@@ -1,10 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FileUpload } from "@/shared/components/FileUpload";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useHistogram } from "../hooks/useHistogram";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+
+const HISTOGRAM_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/histogram-flower.jpg", label: "Flower" },
+  { src: "/examples/histogram-snow.jpg", label: "Snow" },
+];
 
 type Channel = "all" | "red" | "green" | "blue" | "luminance";
 
@@ -47,6 +52,7 @@ export default function HistogramPanel() {
         onFileSelect={handleFile}
         label={t.histogram.uploadLabel}
         sublabel={t.histogram.uploadHint}
+        examples={HISTOGRAM_EXAMPLES}
       />
 
       {h.status === "processing" && (

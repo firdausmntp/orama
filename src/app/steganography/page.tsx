@@ -8,20 +8,21 @@ import {
   DetectPanel,
 } from "@/features/steganography/ui/SteganographyPanels";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+import { Lock, Unlock, Search } from "lucide-react";
 
 export default function SteganographyPage() {
   const { t } = useTranslation();
 
   const TABS = [
-    { id: "encode", label: t.steg.tabEncode, icon: "🔐" },
-    { id: "decode", label: t.steg.tabDecode, icon: "🔓" },
-    { id: "detect", label: t.steg.tabDetect, icon: "🔍" },
+    { id: "encode", label: t.steg.tabEncode, icon: <Lock className="w-4 h-4" /> },
+    { id: "decode", label: t.steg.tabDecode, icon: <Unlock className="w-4 h-4" /> },
+    { id: "detect", label: t.steg.tabDetect, icon: <Search className="w-4 h-4" /> },
   ];
 
   return (
     <div>
       <PageHeader
-        icon="🔐"
+        icon={<Lock className="w-8 h-8" />}
         title={t.steg.pageTitle}
         subtitle={t.steg.pageSubtitle}
         accentColor="bg-orange-neon"

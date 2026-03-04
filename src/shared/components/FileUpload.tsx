@@ -1,7 +1,14 @@
 "use client";
 
 import { useCallback, useState, useRef, useMemo, useEffect } from "react";
+import { Upload, Shuffle, ImageIcon } from "lucide-react";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+
+/** Pre-bundled example images per module (served from /examples/) */
+export interface ExampleImage {
+  src: string;
+  label: string;
+}
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
@@ -9,6 +16,8 @@ interface FileUploadProps {
   label?: string;
   sublabel?: string;
   showSamples?: boolean;
+  /** Local example images for the current module */
+  examples?: ExampleImage[];
 }
 
 /** Large pool of curated picsum image IDs with labels */
@@ -91,6 +100,7 @@ export function FileUpload({
   label,
   sublabel,
   showSamples = true,
+  examples,
 }: FileUploadProps) {
   const { t } = useTranslation();
   const [isDragging, setIsDragging] = useState(false);
@@ -186,6 +196,22 @@ export function FileUpload({
     [fetchImageAsFile, handleFile, t]
   );
 
+  const loadExample = useCallback(
+    async (src: string, label: string) => {
+      try {
+        setLoading(`ex-${src}`);
+        setUrlError(null);
+        const file = await fetchImageAsFile(src, `example-${label.toLowerCase().replace(/\s+/g, "-")}.jpg`);
+        handleFile(file);
+      } catch {
+        setUrlError(t.fileUpload.urlError);
+      } finally {
+        setLoading(null);
+      }
+    },
+    [fetchImageAsFile, handleFile, t]
+  );
+
   return (
     <div className="space-y-3">
       {/* ─── Main Drop Zone ─── */}
@@ -235,7 +261,7 @@ export function FileUpload({
           </div>
         ) : (
           <div className="py-8">
-            <div className="text-5xl mb-4">📁</div>
+            <Upload className="w-12 h-12 mx-auto mb-4 text-charcoal-light" />
             <p className="font-bold text-charcoal text-lg">
               {label || t.fileUpload.dropLabel}
             </p>
@@ -248,6 +274,45 @@ export function FileUpload({
           </div>
         )}
       </div>
+
+      {/* ─── Example Images for This Module ─── */}
+      {examples && examples.length > 0 && !preview && (
+        <div className="neo-card-teal p-4">
+          <p className="text-xs font-black uppercase text-mint mb-3 tracking-wider flex items-center gap-1.5">
+            <ImageIcon className="w-3.5 h-3.5" />
+            {t.fileUpload.exampleLabel}
+          </p>
+          <div className="grid grid-cols-2 gap-3">
+            {examples.map((ex) => (
+              <button
+                key={ex.src}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  loadExample(ex.src, ex.label);
+                }}
+                disabled={loading !== null}
+                className={`
+                  neo-border overflow-hidden transition-all duration-150
+                  bg-bone hover:shadow-[4px_4px_0px_#2DD4A8] hover:border-mint
+                  disabled:cursor-wait group
+                  ${loading === `ex-${ex.src}` ? "animate-pulse" : ""}
+                  ${loading && loading !== `ex-${ex.src}` ? "opacity-50" : ""}
+                `}
+              >
+                <img
+                  src={ex.src}
+                  alt={ex.label}
+                  className="w-full h-24 object-cover"
+                  loading="lazy"
+                />
+                <div className="bg-teal-deep text-mint text-xs font-bold p-2 uppercase text-center truncate group-hover:bg-teal-dark transition-colors">
+                  {ex.label}
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ─── URL Input + Sample Images ─── */}
       {showSamples && !preview && (
@@ -302,7 +367,7 @@ export function FileUpload({
                 className="text-xs font-bold neo-btn bg-charcoal-light text-bone px-2 py-1 hover:bg-orange-neon transition-colors"
                 title="Shuffle"
               >
-                🔀
+                <Shuffle className="w-3.5 h-3.5" />
               </button>
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">

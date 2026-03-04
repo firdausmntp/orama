@@ -32,7 +32,7 @@ const en = {
     heroDesc:
       "Modular image processing hub running <accent>client-side AI</accent> — no server needed. Ten powerful tools in one brutalist interface.",
     tagBrowser: "▸ 100% Browser Processing",
-    tagOpenCV: "▸ OpenCV.js + ONNX Runtime",
+    tagTFjs: "▸ TensorFlow.js AI",
     tagZero: "▸ Zero Backend Cost",
     marquee:
       "STEGANOGRAPHY ◆ AGRICULTURE AI ◆ DOCUMENT SCANNER ◆ ENHANCEMENT ◆ FORENSICS ◆ HISTOGRAM ◆ COLOR SPACE ◆ EDGE DETECTION ◆ FILTERS ◆ MORPHOLOGY ◆ ",
@@ -43,10 +43,10 @@ const en = {
     techNextjsDesc: "App Router",
     techTailwind: "Tailwind CSS",
     techTailwindDesc: "Neobrutalism",
-    techOpencv: "OpenCV.js",
-    techOpencvDesc: "WASM Vision",
-    techOnnx: "ONNX Runtime",
-    techOnnxDesc: "Browser AI",
+    techTFjs: "TensorFlow.js",
+    techTFjsDesc: "Browser AI",
+    techCanvas: "Canvas API",
+    techCanvasDesc: "Pixel Processing",
   },
 
   /* ── Module cards ───────────────────────────────── */
@@ -56,10 +56,10 @@ const en = {
       "Hide secret messages inside images using LSB encoding. Decode hidden data and detect steganographic manipulation with chi-square analysis.",
     agriTitle: "Smart Agriculture AI",
     agriDesc:
-      "Low-resource AI for plant/leaf detection, coin measurement, and automatic object counting using browser-based ONNX inference.",
+      "AI-powered object detection with TensorFlow.js COCO-SSD, connected component labeling, and Hough circle detection — all in-browser.",
     docScanTitle: "Smart Document Scanner",
     docScanDesc:
-      "Auto-detect document edges, apply perspective correction, and produce clean scanned output. Manual corner adjustment supported.",
+      "Auto-detect document edges with Canny edge detection, apply perspective correction via DLT homography, and produce clean scanned output.",
     enhanceTitle: "Enhancement Advisor",
     enhanceDesc:
       "Intelligent image analysis that evaluates brightness, contrast, and saturation — then suggests and applies optimal enhancements.",
@@ -100,13 +100,14 @@ const en = {
     urlLoad: "Load",
     urlError: "Failed to load image. Check the URL or try another.",
     sampleLabel: "Or try a sample image",
+    exampleLabel: "Use an example image",
   },
   resultDisplay: {
     waiting: "WAITING",
     processing: "PROCESSING",
     complete: "COMPLETE",
     error: "ERROR",
-    save: "⬇ Save",
+    save: "Save",
   },
 
   /* ── Steganography ──────────────────────────────── */
@@ -123,7 +124,7 @@ const en = {
     characters: "characters",
     placeholder: "Enter your secret message...",
     encoding: "Encoding...",
-    encodeBtn: "🔐 Encode",
+    encodeBtn: "Encode",
     encodedOutput: "Encoded Output",
     encodedPlaceholder: "Encoded image will appear here",
     /* Decode panel */
@@ -148,6 +149,23 @@ const en = {
       "Object counting, coin detection & measurement — all in-browser",
     tabCount: "Object Counter",
     tabCoin: "Coin Detection",
+    tabAI: "AI Detection",
+    aiModelConfig: "AI Model Configuration",
+    modelLoaded: "READY",
+    modelNotLoaded: "NOT LOADED",
+    preloadModel: "Pre-load",
+    confidenceThreshold: "Confidence",
+    aiModelDesc: "COCO-SSD model detects 80 object classes (person, car, dog, cat, etc.) using MobileNet v2 backbone. Model downloads ~5MB on first use.",
+    uploadAI: "Upload image for AI detection",
+    uploadAIHint: "Detects people, animals, vehicles, furniture & more",
+    detectAIBtn: "Detect Objects",
+    loadingModel: "Loading model...",
+    aiDetectionResult: "AI Detection Result",
+    classesFound: "Classes",
+    inferenceTime: "Inference",
+    detectedClasses: "Detected Classes",
+    allDetections: "All Detections",
+    aiPlaceholder: "AI detection results will appear here",
     /* Counting */
     parameters: "Parameters",
     threshold: "Threshold",
@@ -155,7 +173,7 @@ const en = {
     uploadCount: "Upload image to count objects",
     uploadCountHint: "Best with high-contrast images",
     counting: "Counting...",
-    countBtn: "🔢 Count Objects",
+    countBtn: "Count Objects",
     countResult: "Counting Result",
     objectsFound: "Objects Found",
     countPlaceholder: "Results will appear here",
@@ -166,7 +184,7 @@ const en = {
     uploadCoin: "Upload coin image",
     uploadCoinHint: "Clear top-down view works best",
     detecting: "Detecting...",
-    detectBtn: "🪙 Detect Coins",
+    detectBtn: "Detect Coins",
     coinDetection: "Coin Detection",
     coinsDetected: "Coins Detected",
     coinPlaceholder: "Coin detection results here",
@@ -184,7 +202,7 @@ const en = {
     edgePlaceholder: "Edge detection output",
     scannedDoc: "Scanned Document",
     enhanced: "✓ Enhanced",
-    enhanceBtn: "📝 Enhance (B&W)",
+    enhanceBtn: "Enhance (B&W)",
     scanPlaceholder: "Corrected document here",
   },
 
@@ -231,7 +249,7 @@ const en = {
     avgDelta: "Avg Δ",
     suspicious: "Suspicious",
     elaHigh: "⚠ High ELA residuals detected — possible manipulation",
-    elaMod: "⚡ Moderate residuals — inspect bright regions",
+    elaMod: "Moderate residuals — inspect bright regions",
     elaLow: "✓ Low residuals — image appears consistent",
     /* Blur */
     blurTitle: "Blur & Sharpness Map",

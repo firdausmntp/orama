@@ -1,10 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { FileUpload } from "@/shared/components/FileUpload";
+import { Image, Search } from "lucide-react";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useSteganography } from "../hooks/useSteganography";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
+
+const STEG_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/steg-landscape.jpg", label: "Landscape" },
+  { src: "/examples/steg-portrait.jpg", label: "Portrait" },
+];
 
 export function EncodePanel() {
   const [file, setFile] = useState<File | null>(null);
@@ -26,6 +32,7 @@ export function EncodePanel() {
           onFileSelect={handleFileSelect}
           label={t.steg.uploadCarrier}
           sublabel={t.steg.uploadCarrierHint}
+          examples={STEG_EXAMPLES}
         />
 
         {file && (
@@ -76,7 +83,7 @@ export function EncodePanel() {
           </div>
         ) : (
           <div className="text-center py-12 text-charcoal-light">
-            <p className="text-4xl mb-2">🖼️</p>
+            <Image className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
             <p className="font-mono text-sm">{t.steg.encodedPlaceholder}</p>
           </div>
         )}
@@ -101,6 +108,7 @@ export function DecodePanel() {
         onFileSelect={handleFile}
         label={t.steg.uploadStego}
         sublabel={t.steg.uploadStegoHint}
+        examples={STEG_EXAMPLES}
       />
 
       <ResultDisplay title={t.steg.decodedMessage} status={status}>
@@ -132,6 +140,7 @@ export function DetectPanel() {
         onFileSelect={(f) => detect(f)}
         label={t.steg.uploadAnalyze}
         sublabel={t.steg.uploadAnalyzeHint}
+        examples={STEG_EXAMPLES}
       />
 
       <ResultDisplay title={t.steg.detectionResult} status={status}>
@@ -179,7 +188,7 @@ export function DetectPanel() {
           </div>
         ) : (
           <div className="text-center py-12 text-charcoal-light">
-            <p className="text-4xl mb-2">🔍</p>
+            <Search className="w-10 h-10 mx-auto mb-2 text-charcoal-light" />
             <p className="font-mono text-sm">{t.steg.analysisPlaceholder}</p>
           </div>
         )}

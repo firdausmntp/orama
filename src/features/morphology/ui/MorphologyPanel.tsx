@@ -1,11 +1,16 @@
 "use client";
 
-import { FileUpload } from "@/shared/components/FileUpload";
+import { FileUpload, type ExampleImage } from "@/shared/components/FileUpload";
 import { ResultDisplay } from "@/shared/components/ResultDisplay";
 import { useMorphology } from "../hooks/useMorphology";
 import { MORPH_OPS, STRUCT_SHAPES } from "../lib/morphology";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
 import type { MorphOp, StructShape } from "../lib/morphology";
+
+const MORPH_EXAMPLES: ExampleImage[] = [
+  { src: "/examples/morph-coast.jpg", label: "Coast" },
+  { src: "/examples/morph-road.jpg", label: "Road" },
+];
 
 export default function MorphologyPanel() {
   const mp = useMorphology();
@@ -18,6 +23,7 @@ export default function MorphologyPanel() {
         onFileSelect={(f) => mp.analyze(f)}
         label={t.morphology.uploadLabel}
         sublabel={t.morphology.uploadHint}
+        examples={MORPH_EXAMPLES}
       />
 
       {mp.status === "processing" && (

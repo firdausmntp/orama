@@ -49,7 +49,7 @@ The application implements classical image processing algorithms from peer-revie
 
 ---
 
-## 🎨 UI & UX Highlights
+## UI & UX Highlights
 
 - **Bilingual Support (i18n):** Real-time switching between English (EN) and Indonesian (ID)
 - **Neo-Brutalism Design:** Bold typography, harsh shadows (`neo-shadow`), vibrant palettes (Dark Teal, Neon Orange, Bone)
@@ -62,14 +62,14 @@ The application implements classical image processing algorithms from peer-revie
 
 | Feature | Description |
 |---------|-------------|
-| 🖥️ **100% Browser Processing** | All algorithms run on Canvas `ImageData` — fully offline-capable |
-| 🧩 **10 Interactive Modules** | Steganography, vision, enhancement, forensics & image math |
-| 🌐 **Bilingual UI** | English & Indonesian with runtime switching |
-| 🖼️ **Sample Image Library** | 60+ curated images with random selection & URL loading |
-| 💾 **Smart Downloads** | Output filenames follow `{feature}_{timestamp}.png` convention |
-| 🎨 **Neobrutalism Design** | Dark Teal + Neon Orange theme with bold borders & shadows |
-| 📱 **Responsive Layout** | Mobile-first with categorized dropdown navigation |
-| 📦 **Feature-Driven Architecture** | Each module is isolated under `src/features/` |
+| **100% Browser Processing** | All algorithms run on Canvas `ImageData` — fully offline-capable |
+| **10 Interactive Modules** | Steganography, vision, enhancement, forensics & image math |
+| **Bilingual UI** | English & Indonesian with runtime switching |
+| **Sample Image Library** | 60+ curated images with random selection & URL loading |
+| **Smart Downloads** | Output filenames follow `{feature}_{timestamp}.png` convention |
+| **Neobrutalism Design** | Dark Teal + Neon Orange theme with bold borders & shadows |
+| **Responsive Layout** | Mobile-first with categorized dropdown navigation |
+| **Feature-Driven Architecture** | Each module is isolated under `src/features/` |
 
 ---
 
@@ -391,9 +391,10 @@ Binary morphological operations with configurable structuring elements. Input im
 | **Tailwind CSS** | v4 | Neobrutalism utility classes via `@theme inline` |
 | **React** | 19.2.3 | UI components, hooks, context |
 | **Canvas API** | Native | All image I/O and pixel-level processing |
+| **TensorFlow.js** | Latest | COCO-SSD object detection (MobileNet v2) |
 | **PostCSS** | — | Via `@tailwindcss/postcss` plugin |
 
-> ⚠️ **Zero external image processing libraries.** No OpenCV, no Sharp, no Jimp. Every algorithm is implemented from scratch in TypeScript.
+> **Note:** Core image processing algorithms (edge detection, morphology, filters, etc.) are implemented from scratch in TypeScript. TensorFlow.js is used only for the AI object detection module.
 
 ---
 
@@ -423,8 +424,11 @@ src/
 │   │   └── ui/SteganographyPanels.tsx
 │   ├── agriculture/
 │   │   ├── lib/counter.ts           # CCL, Hough circle transform
+│   │   ├── lib/detector.ts          # TF.js + COCO-SSD AI detection
 │   │   ├── hooks/useDetection.ts
+│   │   ├── hooks/useAIDetection.ts   # AI detection hook
 │   │   └── ui/AgriculturePanels.tsx
+│   │   └── ui/AIDetectionPanel.tsx   # AI detection UI
 │   ├── document-scanner/
 │   │   ├── lib/scanner.ts           # Homography, Otsu, adaptive threshold
 │   │   ├── hooks/useScanner.ts
