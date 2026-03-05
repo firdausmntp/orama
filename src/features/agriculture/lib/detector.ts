@@ -33,8 +33,9 @@ export async function loadModel(): Promise<CocoSsd.ObjectDetection> {
       // Dynamic imports to avoid SSR bundling issues
       await import("@tensorflow/tfjs");
       const cocoSsd = await import("@tensorflow-models/coco-ssd");
+      // Load from local model stored on Vercel CDN (faster, no external dependency)
       const model = await cocoSsd.load({
-        base: "lite_mobilenet_v2", // Fastest model, good accuracy
+        modelUrl: "/models/coco-ssd/model.json",
       });
       modelRef = model;
       return model;

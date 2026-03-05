@@ -3,7 +3,7 @@ const en = {
   nav: {
     stegano: "Stegano",
     agriAi: "Agri AI",
-    docScan: "DocScan",
+    docScan: "OCR",
     enhance: "Enhance",
     forensics: "Forensics",
     histogram: "Histogram",
@@ -11,12 +11,14 @@ const en = {
     edgeDetect: "Edges",
     filters: "Filters",
     morphology: "Morph",
+    fft: "FFT",
+    transforms: "Transforms",
     toggleMenu: "Toggle navigation menu",
     groupTools: "Tools",
     groupProcessing: "Processing",
     steganoDesc: "Hide messages in images",
     agriAiDesc: "Plant detection & counting",
-    docScanDesc: "Scan & correct documents",
+    docScanDesc: "OCR text recognition",
     enhanceDesc: "Auto image enhancement",
     forensicsDesc: "Detect image manipulation",
     histogramDesc: "Color distribution analysis",
@@ -24,18 +26,20 @@ const en = {
     edgeDetectDesc: "Sobel, Prewitt & more",
     filtersDesc: "Blur, sharpen, emboss",
     morphologyDesc: "Erosion, dilation & more",
+    fftDesc: "FFT spectrum & frequency filters",
+    transformsDesc: "Resize, rotate, flip, crop",
   },
 
   /* ── Landing / Home ─────────────────────────────── */
   home: {
     badge: "Digital Image Processing — 2026",
     heroDesc:
-      "Modular image processing hub running <accent>client-side AI</accent> — no server needed. Ten powerful tools in one brutalist interface.",
+      "Modular image processing hub running <accent>client-side AI</accent> — no server needed. Twelve powerful tools in one brutalist interface.",
     tagBrowser: "▸ 100% Browser Processing",
     tagTFjs: "▸ TensorFlow.js AI",
     tagZero: "▸ Zero Backend Cost",
     marquee:
-      "STEGANOGRAPHY ◆ AGRICULTURE AI ◆ DOCUMENT SCANNER ◆ ENHANCEMENT ◆ FORENSICS ◆ HISTOGRAM ◆ COLOR SPACE ◆ EDGE DETECTION ◆ FILTERS ◆ MORPHOLOGY ◆ ",
+      "STEGANOGRAPHY ◆ AGRICULTURE AI ◆ OCR TEXT RECOGNITION ◆ ENHANCEMENT ◆ FORENSICS ◆ HISTOGRAM ◆ COLOR SPACE ◆ EDGE DETECTION ◆ FILTERS ◆ MORPHOLOGY ◆ FFT SPECTRUM ◆ TRANSFORMS ◆ ",
     modulesHeading: "Modules",
 
     /* tech stack */
@@ -53,13 +57,13 @@ const en = {
   modules: {
     steganoTitle: "Steganography + Detection",
     steganoDesc:
-      "Hide secret messages inside images using LSB encoding. Decode hidden data and detect steganographic manipulation with chi-square analysis.",
+      "Hide secret messages inside images using LSB encoding. Decode hidden data, detect steganographic manipulation, and apply visible/invisible watermarks.",
     agriTitle: "Smart Agriculture AI",
     agriDesc:
       "AI-powered object detection with TensorFlow.js COCO-SSD, connected component labeling, and Hough circle detection — all in-browser.",
-    docScanTitle: "Smart Document Scanner",
+    docScanTitle: "OCR Text Recognition",
     docScanDesc:
-      "Auto-detect document edges with Canny edge detection, apply perspective correction via DLT homography, and produce clean scanned output.",
+      "Extract text from images using Tesseract.js OCR engine with multi-language support, word-level detection, and confidence scoring.",
     enhanceTitle: "Enhancement Advisor",
     enhanceDesc:
       "Intelligent image analysis that evaluates brightness, contrast, and saturation — then suggests and applies optimal enhancements.",
@@ -71,16 +75,22 @@ const en = {
       "Visualize RGB and luminance histograms of any image. Apply histogram equalization to improve contrast and tonal distribution.",
     colorSpaceTitle: "Color Space Converter",
     colorSpaceDesc:
-      "Convert images between color representations — grayscale, sepia, binary, inverted, individual channels, and HSL component maps.",
+      "Convert images between color representations — grayscale, sepia, binary, inverted, CMYK, individual channels, and HSL component maps.",
     edgeDetectTitle: "Edge Detection",
     edgeDetectDesc:
-      "Detect edges using classic operators: Sobel, Prewitt, Laplacian, and Roberts Cross. Compare methods and toggle inversion.",
+      "Detect edges using classic operators: Sobel, Prewitt, Laplacian, Roberts Cross, Harris Corner, and Canny multi-stage detector.",
     filtersTitle: "Convolution Filters",
     filtersDesc:
-      "Apply convolution kernels — blur, sharpen, emboss, edge enhance — or define your own custom 3×3 kernel with live preview.",
+      "Apply convolution kernels — blur, sharpen, emboss, edge enhance, median filter — or define your own custom 3×3 kernel with live preview.",
     morphologyTitle: "Morphological Ops",
     morphologyDesc:
-      "Binary morphology operations: erosion, dilation, opening, closing, gradient, top-hat, and black-hat with adjustable structuring elements.",
+      "Binary morphology operations: erosion, dilation, opening, closing, gradient, top-hat, black-hat, and region growing with adjustable structuring elements.",
+    fftTitle: "FFT & Frequency Domain",
+    fftDesc:
+      "Compute 2-D Fast Fourier Transform, visualize magnitude spectra, and apply frequency-domain filters: ideal low-pass, high-pass, and band-pass.",
+    transformsTitle: "Geometric Transforms",
+    transformsDesc:
+      "Apply geometric transformations — resize, rotate, flip, crop, shear, and translate — with nearest-neighbor or bilinear interpolation.",
     launchModule: "Launch Module →",
   },
 
@@ -140,6 +150,22 @@ const en = {
     stegoProb: "Stego Probability",
     analysis: "ANALYSIS:",
     analysisPlaceholder: "Analysis results will appear here",
+    /* Watermark panel */
+    tabWatermark: "Watermark",
+    wmVisible: "Visible",
+    wmInvisible: "Invisible",
+    wmExtract: "Extract",
+    wmUpload: "Upload image for watermarking",
+    wmUploadHint: "PNG recommended for lossless watermark encoding",
+    wmTextPlaceholder: "Enter watermark text...",
+    wmSigPlaceholder: "Enter secret signature...",
+    wmOpacity: "Opacity",
+    wmPosition: "Position",
+    wmApplying: "Applying watermark...",
+    wmApply: "Apply Watermark",
+    wmResult: "Watermark Result",
+    wmExtracted: "EXTRACTED WATERMARK:",
+    wmPlaceholder: "Watermark result will appear here",
   },
 
   /* ── Agriculture ────────────────────────────────── */
@@ -190,20 +216,23 @@ const en = {
     coinPlaceholder: "Coin detection results here",
   },
 
-  /* ── Document Scanner ───────────────────────────── */
+  /* ── Document Scanner / OCR ──────────────────────── */
   docScan: {
-    pageTitle: "Document Scanner",
+    pageTitle: "OCR — Text Recognition",
     pageSubtitle:
-      "Auto edge detection, perspective correction & document enhancement",
-    uploadDoc: "Upload a document photo",
-    uploadDocHint: "Works best with clear document edges visible",
-    edgeDetection: "Edge Detection",
-    detectedCorners: "DETECTED CORNERS:",
-    edgePlaceholder: "Edge detection output",
-    scannedDoc: "Scanned Document",
-    enhanced: "✓ Enhanced",
-    enhanceBtn: "Enhance (B&W)",
-    scanPlaceholder: "Corrected document here",
+      "Extract text from images using Tesseract.js optical character recognition",
+    uploadDoc: "Upload a document image",
+    uploadDocHint: "Works best with clear, high-contrast text",
+    selectLang: "Recognition Language",
+    recognizing: "Recognizing text…",
+    recognizeBtn: "Recognize Text",
+    extractedText: "Extracted Text",
+    confidence: "Confidence",
+    wordCount: "Words",
+    copyText: "Copy Text",
+    downloadTxt: "Download .txt",
+    ocrPlaceholder: "OCR results will appear here",
+    progress: "Time",
   },
 
   /* ── Enhancement Advisor ────────────────────────── */
@@ -354,6 +383,60 @@ const en = {
     originalTitle: "Original",
     binaryTitle: "Binary Input",
     outputTitle: "Result",
+  },
+
+  /* ── FFT & Frequency Domain ──────────────────────── */
+  fft: {
+    pageTitle: "FFT & Frequency Domain",
+    pageSubtitle: "Compute 2-D FFT, visualize spectra & apply frequency-domain filters",
+    uploadLabel: "Upload image for FFT analysis",
+    uploadHint: "PNG or JPEG — image will be padded to power-of-2",
+    filterType: "Filter Type",
+    cutoff: "Cutoff",
+    bandwidth: "Bandwidth",
+    spectrum: "FFT Magnitude Spectrum",
+    filterMask: "Filter Mask",
+    filteredResult: "Filtered Result",
+    applyFilter: "Apply Filter",
+    analyzing: "Computing FFT…",
+    placeholder: "Original Image",
+    lowpass: "Low-pass",
+    highpass: "High-pass",
+    bandpass: "Band-pass",
+  },
+
+  /* ── Transforms ─────────────────────────────────── */
+  transforms: {
+    pageTitle: "Geometric Transforms",
+    pageSubtitle: "Resize, rotate, flip, crop, shear & translate images",
+    uploadLabel: "Upload image for transformation",
+    uploadHint: "PNG or JPEG — apply geometric transforms",
+    transformType: "Transform Type",
+    interpolation: "Interpolation",
+    angle: "Angle",
+    scaleX: "Scale X",
+    scaleY: "Scale Y",
+    flipDir: "Flip Direction",
+    horizontal: "Horizontal",
+    vertical: "Vertical",
+    both: "Both",
+    crop: "Crop",
+    shear: "Shear",
+    translate: "Translate",
+    apply: "Apply Transform",
+    processing: "Applying transform…",
+    placeholder: "Original Image",
+    nearest: "Nearest",
+    bilinear: "Bilinear",
+    resize: "Resize",
+    rotate: "Rotate",
+    flip: "Flip",
+    shearLabel: "Shear",
+    translateLabel: "Translate",
+    cropX: "X",
+    cropY: "Y",
+    cropW: "Width",
+    cropH: "Height",
   },
 
   lang: {

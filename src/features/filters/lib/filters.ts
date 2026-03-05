@@ -1,5 +1,5 @@
 /**
- * Convolution Filters — blur, sharpen, emboss, custom kernel
+ * Convolution Filters — blur, sharpen, emboss, custom kernel, median
  */
 
 export type FilterPreset =
@@ -10,6 +10,7 @@ export type FilterPreset =
   | "unsharpMask"
   | "emboss"
   | "edgeEnhance"
+  | "median"
   | "custom";
 
 export interface KernelDef {
@@ -18,7 +19,7 @@ export interface KernelDef {
   divisor?: number; // if omitted, auto-sum or 1
 }
 
-export const PRESET_KERNELS: Record<Exclude<FilterPreset, "custom">, KernelDef> = {
+export const PRESET_KERNELS: Record<Exclude<FilterPreset, "custom" | "median">, KernelDef> = {
   identity: {
     name: "Identity",
     kernel: [
@@ -137,5 +138,61 @@ export const FILTER_PRESETS: { value: FilterPreset; label: string }[] = [
   { value: "unsharpMask", label: "Unsharp Mask" },
   { value: "emboss", label: "Emboss" },
   { value: "edgeEnhance", label: "Edge Enhance" },
+  { value: "median", label: "Median Filter" },
   { value: "custom", label: "Custom Kernel" },
 ];
+
+/**
+ * Median Filter — non-linear noise reduction
+ * Replaces each pixel with the median of its neighborhood.
+ * Excellent for salt-and-pepper noise removal while preserving edges.
+ */
+export function applyMedianFilter(
+  imageData: ImageData,
+  kernelSize: number = 3,
+  iterations: number = 1
+): ImageData {
+  const { width, height } = imageData;
+  let src = new Uint8ClampedArray(imageData.data);
+  const half = Math.floor(kernelSize / 2);
+
+  for (let iter = 0; iter < iterations; iter++) {
+    const dst = new Uint8ClampedArray(src.length);
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const rArr: number[] = [];
+        const gArr: number[] = [];
+        const bArr: number[] = [];
+
+        for (let ky = -half; ky <= half; ky++) {
+          for (let kx = -half; kx <= half; kx++) {
+            const px = Math.min(width - 1, Math.max(0, x + kx));
+            const py = Math.min(height - 1, Math.max(0, y + ky));
+            const idx = (py * width + px) * 4;
+            rArr.push(src[idx]);
+            gArr.push(src[idx + 1]);
+            bArr.push(src[idx + 2]);
+          }
+        }
+
+        rArr.sort((a, b) => a - b);
+        gArr.sort((a, b) => a - b);
+        bArr.sort((a, b) => a - b);
+
+        const mid = Math.floor(rArr.length / 2);
+        const idx = (y * width + x) * 4;
+        dst[idx] = rArr[mid];
+        dst[idx + 1] = gArr[mid];
+        dst[idx + 2] = bArr[mid];
+        dst[idx + 3] = src[idx + 3];
+      }
+    }
+
+    src = dst;
+  }
+
+  const out = new ImageData(width, height);
+  out.data.set(src);
+  return out;
+}

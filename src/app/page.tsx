@@ -5,7 +5,7 @@ import { useTranslation } from "@/shared/i18n/LanguageContext";
 import {
   Lock,
   Sprout,
-  Scan,
+  FileText,
   Sparkles,
   SearchCode,
   BarChart2,
@@ -13,6 +13,8 @@ import {
   SquareDashed,
   SlidersHorizontal,
   Shapes,
+  AudioWaveform,
+  Move3D,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -24,7 +26,7 @@ export default function HomePage() {
       icon: <Lock className="w-7 h-7" />,
       title: t.modules.steganoTitle,
       description: t.modules.steganoDesc,
-      tags: ["LSB", "Encode", "Decode", "Chi-Square"],
+      tags: ["LSB", "Encode", "Decode", "Watermark"],
       accentColor: "orange" as const,
     },
     {
@@ -37,10 +39,10 @@ export default function HomePage() {
     },
     {
       href: "/document-scanner",
-      icon: <Scan className="w-7 h-7" />,
+      icon: <FileText className="w-7 h-7" />,
       title: t.modules.docScanTitle,
       description: t.modules.docScanDesc,
-      tags: ["Canny", "Homography", "Otsu"],
+      tags: ["Tesseract.js", "OCR", "Multi-lang"],
       accentColor: "teal" as const,
     },
     {
@@ -72,7 +74,7 @@ export default function HomePage() {
       icon: <Palette className="w-7 h-7" />,
       title: t.modules.colorSpaceTitle,
       description: t.modules.colorSpaceDesc,
-      tags: ["Grayscale", "Sepia", "HSL", "Binary"],
+      tags: ["Grayscale", "CMYK", "HSL", "Binary"],
       accentColor: "mint" as const,
     },
     {
@@ -80,7 +82,7 @@ export default function HomePage() {
       icon: <SquareDashed className="w-7 h-7" />,
       title: t.modules.edgeDetectTitle,
       description: t.modules.edgeDetectDesc,
-      tags: ["Sobel", "Prewitt", "Laplacian", "Roberts"],
+      tags: ["Sobel", "Canny", "Harris", "Laplacian"],
       accentColor: "teal" as const,
     },
     {
@@ -88,7 +90,7 @@ export default function HomePage() {
       icon: <SlidersHorizontal className="w-7 h-7" />,
       title: t.modules.filtersTitle,
       description: t.modules.filtersDesc,
-      tags: ["Blur", "Sharpen", "Emboss", "Custom"],
+      tags: ["Blur", "Sharpen", "Median", "Custom"],
       accentColor: "lavender" as const,
     },
     {
@@ -96,8 +98,24 @@ export default function HomePage() {
       icon: <Shapes className="w-7 h-7" />,
       title: t.modules.morphologyTitle,
       description: t.modules.morphologyDesc,
-      tags: ["Erode", "Dilate", "Open", "Close"],
+      tags: ["Erode", "Dilate", "Open", "Region Grow"],
       accentColor: "crimson" as const,
+    },
+    {
+      href: "/fft",
+      icon: <AudioWaveform className="w-7 h-7" />,
+      title: t.modules.fftTitle,
+      description: t.modules.fftDesc,
+      tags: ["FFT", "Low-pass", "High-pass", "Spectrum"],
+      accentColor: "lavender" as const,
+    },
+    {
+      href: "/transforms",
+      icon: <Move3D className="w-7 h-7" />,
+      title: t.modules.transformsTitle,
+      description: t.modules.transformsDesc,
+      tags: ["Resize", "Rotate", "Flip", "Crop"],
+      accentColor: "orange" as const,
     },
   ];
 

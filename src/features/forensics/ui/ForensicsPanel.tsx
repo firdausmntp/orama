@@ -8,8 +8,12 @@ import { useForensics } from "../hooks/useForensics";
 import { useTranslation } from "@/shared/i18n/LanguageContext";
 
 const FORENSICS_EXAMPLES: ExampleImage[] = [
-  { src: "/examples/forensics-city.jpg", label: "City" },
-  { src: "/examples/forensics-nature.jpg", label: "Nature" },
+  { src: "/examples/forensics-edited-ela.jpg", label: "Edited (ELA)" },
+  { src: "/examples/forensics-edited-blur.jpg", label: "Edited (Blur)" },
+  { src: "/examples/forensics-edited-splice.jpg", label: "Edited (Splice)" },
+  { src: "/examples/forensics-edited-copymove.jpg", label: "Edited (Copy-Move)" },
+  { src: "/examples/forensics-city.jpg", label: "Original City" },
+  { src: "/examples/forensics-nature.jpg", label: "Original Nature" },
 ];
 
 /* ================================================================

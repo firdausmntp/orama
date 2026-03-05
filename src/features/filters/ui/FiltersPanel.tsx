@@ -77,10 +77,16 @@ export default function FiltersPanel() {
               <p className="text-xs font-mono text-bone-muted uppercase mb-2">
                 {t.filters.kernelPreview}
               </p>
+              {fl.preset === "median" ? (
+                <div className="text-center text-xs font-mono text-bone p-3">
+                  <p className="text-mint font-bold mb-1">MEDIAN 3×3</p>
+                  <p className="text-bone-muted">Sort neighborhood → pick middle value</p>
+                </div>
+              ) : (
               <div className="grid grid-cols-3 gap-1 max-w-[160px] mx-auto">
                 {(fl.preset === "custom"
                   ? fl.customKernel
-                  : PRESET_KERNELS[fl.preset as Exclude<FilterPreset, "custom">]?.kernel ?? fl.customKernel
+                  : PRESET_KERNELS[fl.preset as Exclude<FilterPreset, "custom" | "median">]?.kernel ?? fl.customKernel
                 ).map((row, r) =>
                   row.map((val, c) => (
                     <div key={`${r}-${c}`} className="relative">
@@ -102,6 +108,7 @@ export default function FiltersPanel() {
                   ))
                 )}
               </div>
+              )}
             </div>
           </div>
 

@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import {
   applyConvolution,
+  applyMedianFilter,
   PRESET_KERNELS,
   type FilterPreset,
 } from "../lib/filters";
@@ -45,9 +46,14 @@ export function useFilters() {
 
   const processImage = useCallback(
     (data: ImageData, p: FilterPreset, k: number[][], iters: number) => {
-      const kernel = p === "custom" ? k : PRESET_KERNELS[p].kernel;
-      const divisor = p === "custom" ? undefined : PRESET_KERNELS[p].divisor;
-      const result = applyConvolution(data, kernel, divisor, iters);
+      let result: ImageData;
+      if (p === "median") {
+        result = applyMedianFilter(data, 3, iters);
+      } else {
+        const kernel = p === "custom" ? k : PRESET_KERNELS[p].kernel;
+        const divisor = p === "custom" ? undefined : PRESET_KERNELS[p].divisor;
+        result = applyConvolution(data, kernel, divisor, iters);
+      }
       const c = document.createElement("canvas");
       c.width = result.width;
       c.height = result.height;

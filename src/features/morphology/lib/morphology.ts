@@ -3,7 +3,7 @@
  * Operates on grayscale/binary images (converts internally)
  */
 
-export type MorphOp = "erode" | "dilate" | "open" | "close" | "gradient" | "tophat" | "blackhat";
+export type MorphOp = "erode" | "dilate" | "open" | "close" | "gradient" | "tophat" | "blackhat" | "regionGrowing";
 
 export type StructShape = "square" | "cross" | "circle";
 
@@ -94,6 +94,40 @@ function dilate(buf: Uint8Array, w: number, h: number, se: boolean[][]): Uint8Ar
   return out;
 }
 
+/** Region growing — seed at center, expands to neighbors within threshold */
+function regionGrow(gray: Uint8Array, w: number, h: number, threshold: number): Uint8Array {
+  const out = new Uint8Array(gray.length);
+  const visited = new Uint8Array(gray.length);
+
+  // Use center pixel as seed
+  const seedX = Math.floor(w / 2);
+  const seedY = Math.floor(h / 2);
+  const seedVal = gray[seedY * w + seedX];
+
+  const stack: [number, number][] = [[seedX, seedY]];
+  const dx = [-1, 0, 1, -1, 1, -1, 0, 1];
+  const dy = [-1, -1, -1, 0, 0, 1, 1, 1];
+
+  while (stack.length > 0) {
+    const [cx, cy] = stack.pop()!;
+    const idx = cy * w + cx;
+    if (visited[idx]) continue;
+    visited[idx] = 1;
+
+    if (Math.abs(gray[idx] - seedVal) <= threshold) {
+      out[idx] = 255;
+      for (let d = 0; d < 8; d++) {
+        const nx = cx + dx[d];
+        const ny = cy + dy[d];
+        if (nx >= 0 && nx < w && ny >= 0 && ny < h && !visited[ny * w + nx]) {
+          stack.push([nx, ny]);
+        }
+      }
+    }
+  }
+  return out;
+}
+
 /** Main morphological operation */
 export function morphologicalOp(
   imageData: ImageData,
@@ -150,6 +184,11 @@ export function morphologicalOp(
       for (let i = 0; i < result.length; i++) result[i] = Math.max(0, closed[i] - gray[i]);
       break;
     }
+    case "regionGrowing": {
+      // Use binaryThreshold as similarity threshold for region growing
+      result = regionGrow(gray, width, height, binaryThreshold / 4);
+      break;
+    }
   }
 
   const out = new ImageData(width, height);
@@ -169,6 +208,7 @@ export const MORPH_OPS: { value: MorphOp; label: string; desc: string }[] = [
   { value: "gradient", label: "Morphological Gradient", desc: "Dilation − Erosion — outlines edges" },
   { value: "tophat", label: "Top Hat", desc: "Original − Opening — extracts bright details" },
   { value: "blackhat", label: "Black Hat", desc: "Closing − Original — extracts dark details" },
+  { value: "regionGrowing", label: "Region Growing", desc: "Seed at center — grow region by similarity" },
 ];
 
 export const STRUCT_SHAPES: { value: StructShape; label: string }[] = [

@@ -12,7 +12,12 @@ export type ColorMode =
   | "blueChannel"
   | "hueMap"
   | "saturationMap"
-  | "brightnessMap";
+  | "brightnessMap"
+  | "cmyk"
+  | "cyanChannel"
+  | "magentaChannel"
+  | "yellowChannel"
+  | "keyChannel";
 
 export interface ConvertOptions {
   mode: ColorMode;
@@ -86,6 +91,37 @@ export function convertColorSpace(
         nr = ng = nb = Math.round(l * 255);
         break;
       }
+      case "cmyk": {
+        const [c2, m2, y2, k2] = rgbToCmyk(r, g, b);
+        // Visualize CMYK as combined: subtract from white
+        nr = Math.round(255 * (1 - c2) * (1 - k2));
+        ng = Math.round(255 * (1 - m2) * (1 - k2));
+        nb = Math.round(255 * (1 - y2) * (1 - k2));
+        break;
+      }
+      case "cyanChannel": {
+        const [c2, , , k2] = rgbToCmyk(r, g, b);
+        const val = Math.round(c2 * (1 - k2) * 255);
+        nr = 0; ng = val; nb = val; // cyan = green + blue
+        break;
+      }
+      case "magentaChannel": {
+        const [, m2, , k2] = rgbToCmyk(r, g, b);
+        const val = Math.round(m2 * (1 - k2) * 255);
+        nr = val; ng = 0; nb = val; // magenta = red + blue
+        break;
+      }
+      case "yellowChannel": {
+        const [, , y2, k2] = rgbToCmyk(r, g, b);
+        const val = Math.round(y2 * (1 - k2) * 255);
+        nr = val; ng = val; nb = 0; // yellow = red + green
+        break;
+      }
+      case "keyChannel": {
+        const [, , , k2] = rgbToCmyk(r, g, b);
+        nr = ng = nb = Math.round((1 - k2) * 255); // invert K for display
+        break;
+      }
     }
 
     od[i] = nr;
@@ -116,6 +152,17 @@ function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
   return [h, s, l];
 }
 
+/** RGB → CMYK conversion: C = (1 - R/255 - K) / (1 - K), etc. */
+function rgbToCmyk(r: number, g: number, b: number): [number, number, number, number] {
+  const rr = r / 255, gg = g / 255, bb = b / 255;
+  const k = 1 - Math.max(rr, gg, bb);
+  if (k >= 1) return [0, 0, 0, 1]; // pure black
+  const c = (1 - rr - k) / (1 - k);
+  const m = (1 - gg - k) / (1 - k);
+  const y = (1 - bb - k) / (1 - k);
+  return [c, m, y, k];
+}
+
 export const COLOR_MODES: { value: ColorMode; label: string }[] = [
   { value: "grayscale", label: "Grayscale" },
   { value: "sepia", label: "Sepia" },
@@ -127,4 +174,9 @@ export const COLOR_MODES: { value: ColorMode; label: string }[] = [
   { value: "hueMap", label: "Hue Map" },
   { value: "saturationMap", label: "Saturation Map" },
   { value: "brightnessMap", label: "Brightness Map" },
+  { value: "cmyk", label: "CMYK (Composite)" },
+  { value: "cyanChannel", label: "Cyan Channel (C)" },
+  { value: "magentaChannel", label: "Magenta Channel (M)" },
+  { value: "yellowChannel", label: "Yellow Channel (Y)" },
+  { value: "keyChannel", label: "Key/Black Channel (K)" },
 ];

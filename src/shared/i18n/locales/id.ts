@@ -5,7 +5,7 @@ const id: TranslationKeys = {
   nav: {
     stegano: "Stegano",
     agriAi: "Agri AI",
-    docScan: "DocScan",
+    docScan: "OCR",
     enhance: "Enhance",
     forensics: "Forensik",
     histogram: "Histogram",
@@ -13,12 +13,14 @@ const id: TranslationKeys = {
     edgeDetect: "Tepi",
     filters: "Filter",
     morphology: "Morfo",
+    fft: "FFT",
+    transforms: "Transformasi",
     toggleMenu: "Buka/tutup menu navigasi",
     groupTools: "Alat",
     groupProcessing: "Pemrosesan",
     steganoDesc: "Sembunyikan pesan di gambar",
     agriAiDesc: "Deteksi tanaman & penghitungan",
-    docScanDesc: "Pindai & koreksi dokumen",
+    docScanDesc: "Pengenalan teks OCR",
     enhanceDesc: "Peningkatan gambar otomatis",
     forensicsDesc: "Deteksi manipulasi gambar",
     histogramDesc: "Analisis distribusi warna",
@@ -26,18 +28,20 @@ const id: TranslationKeys = {
     edgeDetectDesc: "Sobel, Prewitt & lainnya",
     filtersDesc: "Blur, sharpen, emboss",
     morphologyDesc: "Erosi, dilasi & lainnya",
+    fftDesc: "Spektrum FFT & filter frekuensi",
+    transformsDesc: "Ubah ukuran, putar, balik, potong",
   },
 
   /* ── Landing / Home ─────────────────────────────── */
   home: {
     badge: "Pengolahan Citra Digital — 2026",
     heroDesc:
-      "Hub pemrosesan citra modular menggunakan <accent>AI sisi-klien</accent> — tanpa server. Sepuluh alat canggih dalam satu antarmuka brutalis.",
+      "Hub pemrosesan citra modular menggunakan <accent>AI sisi-klien</accent> — tanpa server. Dua belas alat canggih dalam satu antarmuka brutalis.",
     tagBrowser: "▸ 100% Diproses di Browser",
     tagTFjs: "▸ TensorFlow.js AI",
     tagZero: "▸ Tanpa Biaya Backend",
     marquee:
-      "STEGANOGRAFI ◆ PERTANIAN AI ◆ PEMINDAI DOKUMEN ◆ PENINGKATAN ◆ FORENSIK ◆ HISTOGRAM ◆ RUANG WARNA ◆ DETEKSI TEPI ◆ FILTER ◆ MORFOLOGI ◆ ",
+      "STEGANOGRAFI ◆ PERTANIAN AI ◆ OCR PENGENALAN TEKS ◆ PENINGKATAN ◆ FORENSIK ◆ HISTOGRAM ◆ RUANG WARNA ◆ DETEKSI TEPI ◆ FILTER ◆ MORFOLOGI ◆ SPEKTRUM FFT ◆ TRANSFORMASI ◆ ",
     modulesHeading: "Modul",
 
     /* tech stack */
@@ -55,13 +59,13 @@ const id: TranslationKeys = {
   modules: {
     steganoTitle: "Steganografi + Deteksi",
     steganoDesc:
-      "Sembunyikan pesan rahasia di dalam gambar menggunakan encoding LSB. Dekode data tersembunyi dan deteksi manipulasi steganografi dengan analisis chi-square.",
+      "Sembunyikan pesan rahasia di dalam gambar menggunakan encoding LSB. Dekode data tersembunyi, deteksi manipulasi steganografi, dan terapkan watermark terlihat/tak terlihat.",
     agriTitle: "Pertanian Cerdas AI",
     agriDesc:
       "Deteksi objek berbasis AI dengan TensorFlow.js COCO-SSD, pelabelan komponen terhubung, dan deteksi lingkaran Hough — semua di browser.",
-    docScanTitle: "Pemindai Dokumen Pintar",
+    docScanTitle: "OCR Pengenalan Teks",
     docScanDesc:
-      "Deteksi tepi dokumen otomatis dengan Canny edge detection, koreksi perspektif via homografi DLT, dan hasilkan output pindaian bersih.",
+      "Ekstrak teks dari gambar menggunakan mesin OCR Tesseract.js dengan dukungan multi-bahasa, deteksi level kata, dan skor kepercayaan.",
     enhanceTitle: "Penasihat Peningkatan",
     enhanceDesc:
       "Analisis gambar cerdas yang mengevaluasi kecerahan, kontras, dan saturasi — lalu menyarankan dan menerapkan peningkatan optimal.",
@@ -73,16 +77,22 @@ const id: TranslationKeys = {
       "Visualisasikan histogram RGB dan luminansi dari gambar. Terapkan ekualisasi histogram untuk meningkatkan kontras dan distribusi tonal.",
     colorSpaceTitle: "Konverter Ruang Warna",
     colorSpaceDesc:
-      "Konversi gambar antar representasi warna — grayscale, sepia, biner, inversi, kanal individual, dan peta komponen HSL.",
+      "Konversi gambar antar representasi warna — grayscale, sepia, biner, inversi, CMYK, kanal individual, dan peta komponen HSL.",
     edgeDetectTitle: "Deteksi Tepi",
     edgeDetectDesc:
-      "Deteksi tepi menggunakan operator klasik: Sobel, Prewitt, Laplacian, dan Roberts Cross. Bandingkan metode dan aktifkan inversi.",
+      "Deteksi tepi menggunakan operator klasik: Sobel, Prewitt, Laplacian, Roberts Cross, Harris Corner, dan detektor multi-tahap Canny.",
     filtersTitle: "Filter Konvolusi",
     filtersDesc:
-      "Terapkan kernel konvolusi — blur, sharpen, emboss, edge enhance — atau definisikan kernel kustom 3×3 dengan pratinjau langsung.",
+      "Terapkan kernel konvolusi — blur, sharpen, emboss, edge enhance, filter median — atau definisikan kernel kustom 3×3 dengan pratinjau langsung.",
     morphologyTitle: "Operasi Morfologi",
     morphologyDesc:
-      "Operasi morfologi biner: erosi, dilasi, opening, closing, gradient, top-hat, dan black-hat dengan elemen struktural yang dapat disesuaikan.",
+      "Operasi morfologi biner: erosi, dilasi, opening, closing, gradient, top-hat, black-hat, dan region growing dengan elemen struktural yang dapat disesuaikan.",
+    fftTitle: "FFT & Domain Frekuensi",
+    fftDesc:
+      "Hitung Fast Fourier Transform 2-D, visualisasi spektrum magnitudo, dan terapkan filter domain frekuensi: ideal low-pass, high-pass, dan band-pass.",
+    transformsTitle: "Transformasi Geometri",
+    transformsDesc:
+      "Terapkan transformasi geometri — ubah ukuran, putar, balik, potong, geser, dan translasi — dengan interpolasi nearest-neighbor atau bilinear.",
     launchModule: "Buka Modul →",
   },
 
@@ -142,6 +152,22 @@ const id: TranslationKeys = {
     stegoProb: "Probabilitas Stego",
     analysis: "ANALISIS:",
     analysisPlaceholder: "Hasil analisis akan muncul di sini",
+    /* Watermark panel */
+    tabWatermark: "Watermark",
+    wmVisible: "Terlihat",
+    wmInvisible: "Tak Terlihat",
+    wmExtract: "Ekstrak",
+    wmUpload: "Unggah gambar untuk watermark",
+    wmUploadHint: "PNG disarankan untuk encoding watermark lossless",
+    wmTextPlaceholder: "Masukkan teks watermark...",
+    wmSigPlaceholder: "Masukkan tanda tangan rahasia...",
+    wmOpacity: "Opasitas",
+    wmPosition: "Posisi",
+    wmApplying: "Menerapkan watermark...",
+    wmApply: "Terapkan Watermark",
+    wmResult: "Hasil Watermark",
+    wmExtracted: "WATERMARK DIEKSTRAKSI:",
+    wmPlaceholder: "Hasil watermark akan muncul di sini",
   },
 
   /* ── Agriculture ────────────────────────────────── */
@@ -192,20 +218,23 @@ const id: TranslationKeys = {
     coinPlaceholder: "Hasil deteksi koin di sini",
   },
 
-  /* ── Document Scanner ───────────────────────────── */
+  /* ── Document Scanner / OCR ──────────────────────── */
   docScan: {
-    pageTitle: "Pemindai Dokumen",
+    pageTitle: "OCR — Pengenalan Teks",
     pageSubtitle:
-      "Deteksi tepi otomatis, koreksi perspektif & peningkatan dokumen",
-    uploadDoc: "Unggah foto dokumen",
-    uploadDocHint: "Terbaik dengan tepi dokumen yang jelas terlihat",
-    edgeDetection: "Deteksi Tepi",
-    detectedCorners: "SUDUT TERDETEKSI:",
-    edgePlaceholder: "Output deteksi tepi",
-    scannedDoc: "Dokumen Terpindai",
-    enhanced: "✓ Ditingkatkan",
-    enhanceBtn: "Tingkatkan (H&P)",
-    scanPlaceholder: "Dokumen terkoreksi di sini",
+      "Ekstrak teks dari gambar menggunakan pengenalan karakter optik Tesseract.js",
+    uploadDoc: "Unggah gambar dokumen",
+    uploadDocHint: "Terbaik dengan teks yang jelas dan kontras tinggi",
+    selectLang: "Bahasa Pengenalan",
+    recognizing: "Mengenali teks…",
+    recognizeBtn: "Kenali Teks",
+    extractedText: "Teks Terekstrak",
+    confidence: "Kepercayaan",
+    wordCount: "Kata",
+    copyText: "Salin Teks",
+    downloadTxt: "Unduh .txt",
+    ocrPlaceholder: "Hasil OCR akan muncul di sini",
+    progress: "Waktu",
   },
 
   /* ── Enhancement Advisor ────────────────────────── */
@@ -356,6 +385,60 @@ const id: TranslationKeys = {
     originalTitle: "Asli",
     binaryTitle: "Input Biner",
     outputTitle: "Hasil",
+  },
+
+  /* ── FFT & Domain Frekuensi ──────────────────────── */
+  fft: {
+    pageTitle: "FFT & Domain Frekuensi",
+    pageSubtitle: "Hitung FFT 2-D, visualisasi spektrum & terapkan filter domain frekuensi",
+    uploadLabel: "Unggah gambar untuk analisis FFT",
+    uploadHint: "PNG atau JPEG — gambar akan di-padding ke pangkat 2",
+    filterType: "Jenis Filter",
+    cutoff: "Cutoff",
+    bandwidth: "Lebar Pita",
+    spectrum: "Spektrum Magnitudo FFT",
+    filterMask: "Mask Filter",
+    filteredResult: "Hasil Filter",
+    applyFilter: "Terapkan Filter",
+    analyzing: "Menghitung FFT…",
+    placeholder: "Gambar Asli",
+    lowpass: "Low-pass",
+    highpass: "High-pass",
+    bandpass: "Band-pass",
+  },
+
+  /* ── Transforms ─────────────────────────────────── */
+  transforms: {
+    pageTitle: "Transformasi Geometri",
+    pageSubtitle: "Ubah ukuran, putar, balik, potong, geser & translasi gambar",
+    uploadLabel: "Unggah gambar untuk transformasi",
+    uploadHint: "PNG atau JPEG — terapkan transformasi geometri",
+    transformType: "Jenis Transformasi",
+    interpolation: "Interpolasi",
+    angle: "Sudut",
+    scaleX: "Skala X",
+    scaleY: "Skala Y",
+    flipDir: "Arah Cermin",
+    horizontal: "Horizontal",
+    vertical: "Vertikal",
+    both: "Keduanya",
+    crop: "Potong",
+    shear: "Geser",
+    translate: "Translasi",
+    apply: "Terapkan Transformasi",
+    processing: "Menerapkan transformasi…",
+    placeholder: "Gambar Asli",
+    nearest: "Nearest",
+    bilinear: "Bilinear",
+    resize: "Ubah Ukuran",
+    rotate: "Putar",
+    flip: "Balik",
+    shearLabel: "Geser",
+    translateLabel: "Translasi",
+    cropX: "X",
+    cropY: "Y",
+    cropW: "Lebar",
+    cropH: "Tinggi",
   },
 
   lang: {
