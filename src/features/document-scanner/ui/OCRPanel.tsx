@@ -192,7 +192,7 @@ export function OCRPanel() {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-2">
                   <div className="neo-border bg-teal-deep p-2 text-center">
-                    <p className="text-xs font-mono text-charcoal-light">
+                    <p className="text-xs font-mono text-bone-muted">
                       {t.docScan.confidence}
                     </p>
                     <p
@@ -202,7 +202,7 @@ export function OCRPanel() {
                     </p>
                   </div>
                   <div className="neo-border bg-teal-deep p-2 text-center">
-                    <p className="text-xs font-mono text-charcoal-light">
+                    <p className="text-xs font-mono text-bone-muted">
                       {t.docScan.wordCount}
                     </p>
                     <p className="text-lg font-black text-mint">
@@ -210,7 +210,7 @@ export function OCRPanel() {
                     </p>
                   </div>
                   <div className="neo-border bg-teal-deep p-2 text-center">
-                    <p className="text-xs font-mono text-charcoal-light">
+                    <p className="text-xs font-mono text-bone-muted">
                       {t.docScan.progress}
                     </p>
                     <p className="text-lg font-black text-mint">
