@@ -201,14 +201,7 @@ export function OCRPanel() {
                       {result.confidence}%
                     </p>
                   </div>
-                  <div className="neo-border bg-teal-deep p-2 text-center">
-                    <p className="text-xs font-mono text-bone-muted">
-                      {t.docScan.wordCount}
-                    </p>
-                    <p className="text-lg font-black text-mint">
-                      {result.words.length}
-                    </p>
-                  </div>
+                  
                   <div className="neo-border bg-teal-deep p-2 text-center">
                     <p className="text-xs font-mono text-bone-muted">
                       {t.docScan.progress}
