@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { countObjects, detectCircles, type CountResult } from "../lib/counter";
+import { useProcessing } from "@/shared/hooks/useProcessing";
 
 type Status = "idle" | "processing" | "done" | "error";
 type Mode = "count" | "coin";
@@ -17,6 +18,7 @@ export function useDetection() {
     minRadius: 15,
     maxRadius: 80,
   });
+  const { runOffMain } = useProcessing();
 
   const loadImageData = useCallback(
     (file: File): Promise<{ imageData: ImageData; canvas: HTMLCanvasElement }> => {
@@ -48,18 +50,15 @@ export function useDetection() {
 
         const { imageData, canvas } = await loadImageData(file);
 
+        // Run heavy computation off main thread to avoid UI freeze
         let countResult: CountResult;
         if (processMode === "coin") {
-          countResult = detectCircles(
-            imageData,
-            params.minRadius,
-            params.maxRadius
+          countResult = await runOffMain(() =>
+            detectCircles(imageData, params.minRadius, params.maxRadius)
           );
         } else {
-          countResult = countObjects(
-            imageData,
-            params.threshold,
-            params.minArea
+          countResult = await runOffMain(() =>
+            countObjects(imageData, params.threshold, params.minArea)
           );
         }
 
@@ -86,7 +85,7 @@ export function useDetection() {
         setStatus("error");
       }
     },
-    [loadImageData, params]
+    [loadImageData, params, runOffMain]
   );
 
   const downloadOutput = useCallback(() => {

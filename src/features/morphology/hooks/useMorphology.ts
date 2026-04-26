@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { morphologicalOp, type MorphOp, type StructShape } from "../lib/morphology";
+import { useProcessing } from "@/shared/hooks/useProcessing";
 
 type Status = "idle" | "processing" | "done" | "error";
 
@@ -15,6 +16,7 @@ export function useMorphology() {
   const [binaryUrl, setBinaryUrl] = useState<string | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [imageData, setImageData] = useState<ImageData | null>(null);
+  const { runOffMain } = useProcessing();
 
   const loadImage = useCallback(
     (file: File): Promise<ImageData> =>
@@ -38,8 +40,10 @@ export function useMorphology() {
   );
 
   const processImage = useCallback(
-    (data: ImageData, o: MorphOp, ks: number, sh: StructShape, t: number) => {
-      const { output, binaryInput } = morphologicalOp(data, o, ks, sh, true, t);
+    async (data: ImageData, o: MorphOp, ks: number, sh: StructShape, t: number) => {
+      const { output, binaryInput } = await runOffMain(() =>
+        morphologicalOp(data, o, ks, sh, true, t)
+      );
 
       const c1 = document.createElement("canvas");
       c1.width = binaryInput.width;
@@ -53,7 +57,7 @@ export function useMorphology() {
       c2.getContext("2d")!.putImageData(output, 0, 0);
       setOutputUrl(c2.toDataURL());
     },
-    []
+    [runOffMain]
   );
 
   const analyze = useCallback(
@@ -61,7 +65,7 @@ export function useMorphology() {
       try {
         setStatus("processing");
         const data = await loadImage(file);
-        processImage(data, op, kernelSize, shape, threshold);
+        await processImage(data, op, kernelSize, shape, threshold);
         setStatus("done");
       } catch {
         setStatus("error");
@@ -71,33 +75,33 @@ export function useMorphology() {
   );
 
   const changeOp = useCallback(
-    (o: MorphOp) => {
+    async (o: MorphOp) => {
       setOp(o);
-      if (imageData) processImage(imageData, o, kernelSize, shape, threshold);
+      if (imageData) await processImage(imageData, o, kernelSize, shape, threshold);
     },
     [imageData, kernelSize, shape, threshold, processImage]
   );
 
   const changeKernelSize = useCallback(
-    (ks: number) => {
+    async (ks: number) => {
       setKernelSize(ks);
-      if (imageData) processImage(imageData, op, ks, shape, threshold);
+      if (imageData) await processImage(imageData, op, ks, shape, threshold);
     },
     [imageData, op, shape, threshold, processImage]
   );
 
   const changeShape = useCallback(
-    (sh: StructShape) => {
+    async (sh: StructShape) => {
       setShape(sh);
-      if (imageData) processImage(imageData, op, kernelSize, sh, threshold);
+      if (imageData) await processImage(imageData, op, kernelSize, sh, threshold);
     },
     [imageData, op, kernelSize, threshold, processImage]
   );
 
   const changeThreshold = useCallback(
-    (t: number) => {
+    async (t: number) => {
       setThreshold(t);
-      if (imageData) processImage(imageData, op, kernelSize, shape, t);
+      if (imageData) await processImage(imageData, op, kernelSize, shape, t);
     },
     [imageData, op, kernelSize, shape, processImage]
   );

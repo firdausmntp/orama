@@ -6,6 +6,7 @@ import {
   applyFrequencyFilter,
   type FrequencyFilter,
 } from "../lib/fft";
+import { useProcessing } from "@/shared/hooks/useProcessing";
 
 type Status = "idle" | "processing" | "done" | "error";
 
@@ -18,6 +19,7 @@ export function useFFT() {
   const [filterType, setFilterType] = useState<FrequencyFilter>("lowpass");
   const [cutoff, setCutoff] = useState(30);
   const [bandwidth, setBandwidth] = useState(20);
+  const { runOffMain } = useProcessing();
 
   // store raw FFT data so we can re-apply filters without recomputing
   const fftRef = useRef<{
@@ -54,9 +56,8 @@ export function useFFT() {
         setFilterMask(null);
         const data = await loadImage(file);
 
-        // run FFT (sync but heavy — wrapped in microtask for UI update)
-        await new Promise<void>((r) => setTimeout(r, 0));
-        const result = fft2D(data);
+        // Run FFT off main thread to avoid UI freeze
+        const result = await runOffMain(() => fft2D(data));
 
         fftRef.current = {
           re: result.re,
@@ -70,18 +71,20 @@ export function useFFT() {
         setStatus("error");
       }
     },
-    [loadImage],
+    [loadImage, runOffMain],
   );
 
-  const applyFilter = useCallback(() => {
+  const applyFilter = useCallback(async () => {
     const fftData = fftRef.current;
     if (!fftData) return;
 
     const { re, im, width, height } = fftData;
-    const result = applyFrequencyFilter(re, im, width, height, filterType, cutoff, bandwidth);
+    const result = await runOffMain(() =>
+      applyFrequencyFilter(re, im, width, height, filterType, cutoff, bandwidth)
+    );
     setFilteredImage(result.filtered);
     setFilterMask(result.filterMask);
-  }, [filterType, cutoff, bandwidth]);
+  }, [filterType, cutoff, bandwidth, runOffMain]);
 
   const reset = useCallback(() => {
     setStatus("idle");

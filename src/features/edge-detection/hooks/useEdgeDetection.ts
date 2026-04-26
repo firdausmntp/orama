@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { detectEdges, type EdgeMethod } from "../lib/edgeDetect";
+import { useProcessing } from "@/shared/hooks/useProcessing";
 
 type Status = "idle" | "processing" | "done" | "error";
 
@@ -12,6 +13,7 @@ export function useEdgeDetection() {
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [imageData, setImageData] = useState<ImageData | null>(null);
+  const { runOffMain } = useProcessing();
 
   const loadImage = useCallback(
     (file: File): Promise<ImageData> =>
@@ -35,15 +37,15 @@ export function useEdgeDetection() {
   );
 
   const processImage = useCallback(
-    (data: ImageData, m: EdgeMethod, inv: boolean) => {
-      const result = detectEdges(data, m, inv);
+    async (data: ImageData, m: EdgeMethod, inv: boolean) => {
+      const result = await runOffMain(() => detectEdges(data, m, inv));
       const c = document.createElement("canvas");
       c.width = result.width;
       c.height = result.height;
       c.getContext("2d")!.putImageData(result, 0, 0);
       setOutputUrl(c.toDataURL());
     },
-    []
+    [runOffMain]
   );
 
   const analyze = useCallback(
@@ -51,7 +53,7 @@ export function useEdgeDetection() {
       try {
         setStatus("processing");
         const data = await loadImage(file);
-        processImage(data, method, invert);
+        await processImage(data, method, invert);
         setStatus("done");
       } catch {
         setStatus("error");
@@ -61,17 +63,17 @@ export function useEdgeDetection() {
   );
 
   const changeMethod = useCallback(
-    (m: EdgeMethod) => {
+    async (m: EdgeMethod) => {
       setMethod(m);
-      if (imageData) processImage(imageData, m, invert);
+      if (imageData) await processImage(imageData, m, invert);
     },
     [imageData, invert, processImage]
   );
 
-  const toggleInvert = useCallback(() => {
+  const toggleInvert = useCallback(async () => {
     const newInv = !invert;
     setInvert(newInv);
-    if (imageData) processImage(imageData, method, newInv);
+    if (imageData) await processImage(imageData, method, newInv);
   }, [imageData, method, invert, processImage]);
 
   const downloadOutput = useCallback(() => {

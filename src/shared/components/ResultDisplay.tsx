@@ -27,7 +27,7 @@ export function ResultDisplay({
   const statusConf = STATUS_CONFIG[status];
 
   return (
-    <div className="neo-card">
+    <section className="neo-card" aria-label={title}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b-3 border-charcoal bg-teal-dark">
         <h3 className="font-black text-bone uppercase tracking-wider text-sm">
@@ -36,6 +36,8 @@ export function ResultDisplay({
         <div className="flex items-center gap-2">
           <span
             className={`px-2 py-1 text-xs font-bold neo-border ${statusConf.color}`}
+            role="status"
+            aria-live="polite"
           >
             {statusConf.label}
           </span>
@@ -43,6 +45,7 @@ export function ResultDisplay({
             <button
               onClick={onDownload}
               className="neo-btn neo-btn-primary text-xs px-2 py-1"
+              aria-label={`${t.resultDisplay.save} ${title}`}
             >
               {t.resultDisplay.save}
             </button>
@@ -52,6 +55,6 @@ export function ResultDisplay({
 
       {/* Content */}
       <div className="p-4">{children}</div>
-    </div>
+    </section>
   );
 }

@@ -158,6 +158,9 @@ export function Navbar() {
                 <button
                   key={group.key}
                   onClick={() => toggleDropdown(group.key)}
+                  aria-expanded={isOpen}
+                  aria-haspopup="true"
+                  aria-controls={`dropdown-${group.key}`}
                   className={`
                     px-4 py-2 text-sm font-black uppercase tracking-wider
                     transition-all duration-150 neo-border flex items-center gap-1.5
@@ -222,7 +225,7 @@ export function Navbar() {
         <div className="overflow-hidden">
           <div className="bg-teal-deep border-t-[3px] border-charcoal">
             <div className="max-w-7xl mx-auto px-4 py-4">
-              <div className="grid grid-cols-5 lg:grid-cols-7 gap-3">
+              <nav className="grid grid-cols-5 lg:grid-cols-7 gap-3" id={`dropdown-${activeGroup}`} aria-label="Module navigation">
                 {NAV_GROUPS.find((g) => g.key === activeGroup)?.items.map(
                   (item) => {
                     const isActive = pathname === item.href;
@@ -250,7 +253,7 @@ export function Navbar() {
                     );
                   }
                 )}
-              </div>
+              </nav>
             </div>
           </div>
         </div>

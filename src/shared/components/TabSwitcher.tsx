@@ -20,10 +20,14 @@ export function TabSwitcher({ tabs, defaultTab, children }: TabSwitcherProps) {
   return (
     <div>
       {/* Tab Bar */}
-      <div className="flex flex-wrap border-b-3 border-charcoal">
+      <div className="flex flex-wrap border-b-3 border-charcoal" role="tablist" aria-label="Module tabs">
         {tabs.map((tab) => (
           <button
             key={tab.id}
+            role="tab"
+            aria-selected={activeTab === tab.id}
+            aria-controls={`tabpanel-${tab.id}`}
+            id={`tab-${tab.id}`}
             onClick={() => setActiveTab(tab.id)}
             className={`
               px-4 py-3 font-bold uppercase text-sm tracking-wider
@@ -36,14 +40,21 @@ export function TabSwitcher({ tabs, defaultTab, children }: TabSwitcherProps) {
               }
             `}
           >
-            {tab.icon && <span className="flex items-center justify-center w-4 h-4">{tab.icon}</span>}
+            {tab.icon && <span className="flex items-center justify-center w-4 h-4" aria-hidden="true">{tab.icon}</span>}
             {tab.label}
           </button>
         ))}
       </div>
 
       {/* Content */}
-      <div className="p-6 neo-border border-t-0">{children(activeTab)}</div>
+      <div
+        className="p-6 neo-border border-t-0"
+        role="tabpanel"
+        id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+      >
+        {children(activeTab)}
+      </div>
     </div>
   );
 }

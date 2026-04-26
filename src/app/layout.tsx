@@ -3,6 +3,7 @@ import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/shared/components/Navbar";
 import { Footer } from "@/shared/components/Footer";
+import { ErrorBoundary } from "@/shared/components/ErrorBoundary";
 import { Providers } from "./providers";
 
 const spaceGrotesk = Space_Grotesk({
@@ -35,7 +36,9 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
-          <main className="min-h-screen bg-bone">{children}</main>
+          <main className="min-h-screen bg-bone">
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </main>
           <Footer />
         </Providers>
       </body>

@@ -216,6 +216,15 @@ export function FileUpload({
     <div className="space-y-3">
       {/* ─── Main Drop Zone ─── */}
       <div
+        role="button"
+        tabIndex={0}
+        aria-label={label || t.fileUpload.dropLabel}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
         onDragOver={(e) => {
           e.preventDefault();
           setIsDragging(true);
@@ -240,6 +249,7 @@ export function FileUpload({
           accept={accept}
           onChange={handleChange}
           className="hidden"
+          aria-label={label || t.fileUpload.dropLabel}
         />
 
         {preview ? (
