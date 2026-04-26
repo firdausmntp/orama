@@ -151,7 +151,7 @@ export function OCRPanel() {
                   onLoad={handleImgLoad}
                 />
                 {/* Word bounding-box overlay */}
-                {result && imgSize && imgRef.current && (
+                {result && imgSize && (
                   <svg
                     className="absolute top-0 left-0 w-full h-full pointer-events-none"
                     viewBox={`0 0 ${imgSize.width} ${imgSize.height}`}

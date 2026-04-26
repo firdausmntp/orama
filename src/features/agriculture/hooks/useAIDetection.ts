@@ -14,7 +14,7 @@ type Status = "idle" | "loading-model" | "processing" | "done" | "error";
 
 export function useAIDetection() {
   const [status, setStatus] = useState<Status>("idle");
-  const [modelReady, setModelReady] = useState(false);
+  const [modelReady, setModelReady] = useState<boolean>(() => isModelLoaded());
   const [result, setResult] = useState<DetectionResult | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -24,8 +24,6 @@ export function useAIDetection() {
 
   useEffect(() => {
     mountedRef.current = true;
-    // Check if model is already loaded
-    setModelReady(isModelLoaded());
     return () => {
       mountedRef.current = false;
     };

@@ -4,7 +4,6 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
   useCallback,
   type ReactNode,
 } from "react";
@@ -34,19 +33,18 @@ const LanguageContext = createContext<LanguageContextValue>({
 const STORAGE_KEY = "orama-lang";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
-
-  /* Hydrate from localStorage (client only) */
-  useEffect(() => {
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (typeof window === "undefined") return "en";
     try {
       const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
       if (saved && (saved === "en" || saved === "id")) {
-        setLocaleState(saved);
+        return saved;
       }
     } catch {
       /* SSR or private mode — ignore */
     }
-  }, []);
+    return "en";
+  });
 
   const setLocale = useCallback((l: Locale) => {
     setLocaleState(l);

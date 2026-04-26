@@ -84,8 +84,11 @@ export function Navbar() {
 
   /* close everything on route change */
   useEffect(() => {
-    setMobileOpen(false);
-    setActiveGroup(null);
+    const rafId = requestAnimationFrame(() => {
+      setMobileOpen(false);
+      setActiveGroup(null);
+    });
+    return () => cancelAnimationFrame(rafId);
   }, [pathname]);
 
   /* close on click-outside */

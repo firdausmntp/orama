@@ -18,13 +18,16 @@ function CanvasView({ canvas, alt }: { canvas: HTMLCanvasElement | null; alt: st
   useEffect(() => {
     if (!canvas || !ref.current) return;
     ref.current.innerHTML = "";
-    canvas.style.maxWidth = "100%";
-    canvas.style.height = "auto";
-    canvas.style.border = "3px solid #1A1A1A";
     ref.current.appendChild(canvas);
   }, [canvas]);
   if (!canvas) return null;
-  return <div ref={ref} aria-label={alt} className="flex justify-center" />;
+  return (
+    <div
+      ref={ref}
+      aria-label={alt}
+      className="flex justify-center [&_canvas]:max-w-full [&_canvas]:h-auto [&_canvas]:border-[3px] [&_canvas]:border-charcoal"
+    />
+  );
 }
 
 export default function HistogramPanel() {
